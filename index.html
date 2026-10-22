@@ -23,81 +23,65 @@ html, body { margin: 0; background: #ffffff; color: #1f2a37; font-family: var(--
   --color-bg: #ffffff; --color-panel: #ffffff; --color-fg: #1f2a37; --color-fg-muted: #5c6878; --color-border-line: #dfe5ee;
   --color-ok: #1e7a46; --color-bad: #b42318; --cds-chart-grid: #edf1f6; --cds-chart-axis: #c9d2de; --cds-chart-reference: #8c99aa;
   --cds-surface-popover: #ffffff; --cds-border: #dfe5ee; --cds-text-secondary: #5c6878; --cds-chart-muted: #d6e0f2;
-  color-scheme: light; background: #f3f6fb; color: var(--color-fg); border-radius: var(--cds-radius); padding: var(--cds-pad-lg);
-  font-family: var(--font-anthropic-sans); display: flex; flex-direction: column; gap: var(--cds-gap-lg); }
-.cd-top { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: var(--cds-gap-md); }
-.cd-head { flex: 1 1 24rem; min-width: 0; }
-.cd-head h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; }
-.cd-head p { margin: var(--cds-gap-xs) 0 0; color: var(--color-fg-muted); font-size: var(--cds-font-size-body); max-width: 60rem; }
-.cd-filter { display: flex; align-items: center; gap: var(--cds-gap-sm); background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-xs) var(--cds-pad-sm); }
-.cd-filter label { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
-.cd-filter select { font: inherit; font-size: var(--cds-font-size-body); color: var(--color-fg); background: #ffffff; border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: 4px 8px; min-width: 9rem; }
-.cd-filter button { font: inherit; font-size: var(--cds-font-size-caption); color: #2F5597; background: none; border: none; cursor: pointer; padding: 4px; }
-.cd-filter button[hidden] { display: none; }
-.cd-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 10.5rem), 1fr)); gap: var(--cds-gap-md); }
-.cd-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); min-width: 0; }
-.cd-tile { display: flex; flex-direction: column; gap: var(--cds-gap-xs); }
-.cd-label { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
-.cd-big { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); font-variant-numeric: tabular-nums; }
-.cd-sub { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); font-variant-numeric: tabular-nums; }
+  color-scheme: light; background: #f3f6fb; color: var(--color-fg); border-radius: var(--cds-radius);
+  font-family: var(--font-anthropic-sans);
+  aspect-ratio: 16 / 9; display: grid; grid-template-rows: auto minmax(0, 1fr); gap: 10px; padding: 14px 16px; overflow: hidden; }
+.cd-wrap { container-type: inline-size; }
+.cd-top { display: flex; align-items: center; justify-content: space-between; gap: var(--cds-gap-md); min-width: 0; }
+.cd-head { flex: 1 1 auto; min-width: 0; }
+.cd-head h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: 20px; line-height: 1.2; margin: 0; }
+.cd-head p { margin: 2px 0 0; color: var(--color-fg-muted); font-size: 12.5px; }
+.cd-controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+.cd-tabs { display: inline-flex; background: #e6ecf5; border-radius: 999px; padding: 3px; gap: 2px; }
+.cd-tabs button { font: inherit; font-size: 12.5px; color: #2F5597; background: none; border: none; border-radius: 999px; padding: 5px 14px; cursor: pointer; }
+.cd-tabs button[aria-selected="true"] { background: #17375E; color: #ffffff; font-weight: 600; }
+.cd-filter { display: flex; align-items: center; gap: 6px; background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: 4px 8px; }
+.cd-filter label { font-size: 11px; color: var(--color-fg-muted); }
+.cd-filter select { font: inherit; font-size: 12.5px; color: var(--color-fg); background: #ffffff; border: 1px solid var(--color-border-line); border-radius: 6px; padding: 3px 6px; }
+.cd-filter button { font: inherit; font-size: 11px; color: #2F5597; background: none; border: none; cursor: pointer; padding: 2px 4px; }
+.cd-filter button[hidden], .cd-secwrap[hidden] { display: none; }
+.cd-secwrap { display: inline-flex; align-items: center; gap: 6px; }
+.cd-panel { display: grid; grid-template-rows: auto minmax(0, 1.2fr) minmax(0, 1fr); gap: 10px; min-height: 0; }
+.cd-panel[hidden] { display: none; }
+.cd-tiles { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
+.cd-tiles.five { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.cd-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); min-width: 0; }
+.cd-tile { display: flex; flex-direction: column; padding: 8px 12px; gap: 2px; }
+.cd-tile .cd-label { font-size: 11px; font-weight: 700; color: var(--color-fg); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cd-tile .cd-big { font-family: var(--font-anthropic-serif); font-size: 22px; line-height: 1.15; font-weight: 700; color: #2F5597; font-variant-numeric: tabular-nums; }
+.cd-tile .cd-sub { font-size: 11px; color: var(--color-fg-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-variant-numeric: tabular-nums; }
 .cd-up { color: var(--color-bad); } .cd-down { color: var(--color-ok); }
-.cd-stack { display: flex; flex-direction: column; gap: var(--cds-gap-md); }
-.cd-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); gap: var(--cds-gap-md); }
-.cd-card h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0; }
-.cd-note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: var(--cds-gap-xs) 0 var(--cds-gap-md); }
-.cd-section { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: var(--cds-gap-sm) 0 0; }
-.cd-chart { position: relative; min-height: 280px; }
-.cd-chart.tall { min-height: 360px; }
-.cd-chart svg { display: block; overflow: visible; }
-.cd-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-sm) var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin-bottom: var(--cds-gap-sm); }
-.cd-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.cd-row { display: grid; gap: 10px; min-height: 0; }
+.cd-row .cd-card { padding: 10px 12px; display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
+.cd-row .cd-card h2 { font-size: 13px; font-weight: var(--cds-font-weight-medium); margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cd-legend { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 11px; color: var(--color-fg-muted); margin: 4px 0 2px; }
+.cd-legend span { display: inline-flex; align-items: center; gap: 5px; }
 .cd-legend i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
-.cd-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; white-space: nowrap; display: none; z-index: 2; }
+.cd-chart { flex: 1 1 auto; min-height: 0; position: relative; }
+.cd-chart svg { display: block; overflow: visible; }
+.r-ov2 { grid-template-columns: 1fr 1fr; }
+.r-ov3 { grid-template-columns: 0.9fr 1.25fr 0.75fr 1.1fr; }
+.r-b2 { grid-template-columns: 1.5fr 1fr; }
+.r-b3 { grid-template-columns: 1.25fr 0.8fr 1.15fr; }
+.r-d2 { grid-template-columns: 1fr; }
+.r-d3 { grid-template-columns: 1.3fr 1fr; }
+.cd-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: 11px; font-variant-numeric: tabular-nums; white-space: nowrap; display: none; z-index: 2; }
 .cd-tip .t { color: var(--cds-text-secondary); margin-bottom: 2px; }
 .cd-tip .r { display: flex; align-items: center; gap: 6px; }
 .cd-tip .r i { width: 8px; height: 8px; border-radius: 2px; display: inline-block; }
 .cd-tip .r b { margin-left: auto; padding-left: var(--cds-gap-md); font-weight: 500; }
-.cd-pie { min-height: 380px; position: relative; }
-.cd-pie-svg { flex: 0 1 280px; min-width: 200px; position: relative; }
-.cd-pie-svg svg { display: block; }
-.cd-pie-list { flex: 1 1 14rem; display: flex; flex-direction: column; gap: var(--cds-gap-xs); font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
-.cd-pie-list .it { display: grid; grid-template-columns: 12px 1fr auto auto; gap: var(--cds-gap-sm); align-items: center; padding: 2px 0; border-bottom: 1px solid var(--color-border-line); }
-.cd-pie-list .it i { width: 12px; height: 12px; border-radius: 3px; }
-.cd-pie-list .nm { color: var(--color-fg); }
-.cd-pie-list .v { color: var(--color-fg-muted); text-align: right; }
-.cd-pie-list .pc { font-weight: 500; text-align: right; min-width: 3.2rem; }
-.cd-empty { display: flex; align-items: center; justify-content: center; min-height: inherit; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); text-align: center; padding: 0 var(--cds-pad-lg); }
+.cd-empty, .cd-fail { display: flex; align-items: center; justify-content: center; height: 100%; color: var(--color-fg-muted); font-size: 11px; text-align: center; padding: 0 12px; }
+.cd-fail { gap: 6px; }
+.cd-fail::before { content: ""; width: .375rem; height: .375rem; border-radius: 50%; background: var(--color-bad); }
 [data-dash-source-state=empty] { color: transparent; }
 [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
-.cd-fail { display: flex; align-items: center; justify-content: center; gap: 6px; min-height: inherit; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
-.cd-fail::before { content: ""; width: .375rem; height: .375rem; border-radius: 50%; background: var(--color-bad); }
-/* one-slide (16:9) layout */
-.cd-wrap { container-type: inline-size; }
-.cd { aspect-ratio: 16 / 9; display: grid; grid-template-rows: auto auto minmax(0, 1.2fr) minmax(0, 1fr); gap: 10px; padding: 14px 16px; overflow: hidden; }
-.cd-top { align-items: center; flex-wrap: nowrap; }
-.cd-head h1 { font-size: 20px; line-height: 1.2; }
-.cd-head p { font-size: 12.5px; margin-top: 2px; }
-.cd-tiles { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
-.cd-tile { padding: 8px 12px; gap: 2px; }
-.cd-tile .cd-big { font-size: 22px; line-height: 1.15; }
-.cd-tile .cd-label, .cd-tile .cd-sub { font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.cd-row { display: grid; gap: 10px; min-height: 0; }
-.cd-row2 { grid-template-columns: 1fr 1fr; }
-.cd-row3 { grid-template-columns: 1fr 1.15fr 0.85fr; }
-.cd-row .cd-card { padding: 10px 12px; display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
-.cd-row .cd-card h2 { font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.cd-row .cd-legend { margin: 4px 0 2px; font-size: 11px; gap: 4px 10px; }
-.cd-row .cd-chart, .cd-row .cd-pie { flex: 1 1 auto; min-height: 0; position: relative; }
-.cd-row .cd-chart.tall { min-height: 0; }
-.cd-empty, .cd-fail { height: 100%; }
-.cd-tile .cd-label { font-weight: 700; color: var(--color-fg); }
-.cd .cd-tile .cd-big { color: #2F5597; font-weight: 700; }
 @container (max-width: 900px) {
   .cd { aspect-ratio: auto; display: flex; flex-direction: column; }
   .cd-top { flex-wrap: wrap; }
-  .cd-tiles { grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); }
-  .cd-row2, .cd-row3 { grid-template-columns: 1fr; }
-  .cd-row .cd-chart, .cd-row .cd-pie { flex: none; min-height: 260px; }
+  .cd-panel { display: flex; flex-direction: column; }
+  .cd-tiles, .cd-tiles.five { grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); }
+  .cd-row { grid-template-columns: 1fr !important; }
+  .cd-chart { flex: none; min-height: 260px; }
 }
 </style>
 </head>
@@ -110,53 +94,86 @@ html, body { margin: 0; background: #ffffff; color: #1f2a37; font-family: var(--
   <div class="cd-top">
     <header class="cd-head">
       <h1 id="title">B2B &amp; DTC concessions</h1>
-      <p id="takeaway" class="dash-skeleton">In <span class="m-month" data-source="kpis" data-field="month">—</span>, B2B noissue-fault concessions were <span class="m-fault" data-source="fault_12m" data-field="b2b_total">—</span> (<span class="m-chg" data-source="fault_change" data-field="b2b_change">—</span> vs the month before)<span id="tk-rank"></span>; DTC noissue-fault concessions were <span class="m-fault" data-source="fault_12m" data-field="dtc_total">—</span>.</p>
+      <p id="takeaway" class="dash-skeleton">In <span class="w-m" data-source="fault_12m" data-field="month">—</span>, B2B noissue-fault concessions were <span class="w-m" data-source="fault_12m" data-field="b2b_total">—</span> (<span class="w-m m-chg" data-source="fault_change" data-field="b2b_change">—</span> vs the month before)<span id="tk-rank"></span>; DTC noissue-fault concessions were <span class="w-m" data-source="fault_12m" data-field="dtc_total">—</span>.</p>
     </header>
-    <div class="cd-filter" id="filter">
-      <label for="f-month">Month</label>
-      <select id="f-month" data-source="fault_12m"></select>
-      <button type="button" id="f-reset" hidden>Reset</button>
+    <div class="cd-controls">
+      <div class="cd-tabs" role="tablist" id="tabs">
+        <button type="button" role="tab" data-tab="overview" aria-selected="true">Overview</button>
+        <button type="button" role="tab" data-tab="b2b" aria-selected="false">B2B</button>
+        <button type="button" role="tab" data-tab="dtc" aria-selected="false">DTC</button>
+      </div>
+      <div class="cd-filter" id="filter">
+        <label for="f-month">Month</label>
+        <select id="f-month" data-source="fault_12m"></select>
+        <span id="f-sec-wrap" class="cd-secwrap"><label for="f-section">Section</label>
+        <select id="f-section" data-source="kpis"></select>
+        <label for="f-group">Group</label>
+        <select id="f-group" data-source="tickets"></select></span>
+        <button type="button" id="f-reset" hidden>Reset</button>
+      </div>
     </div>
   </div>
 
-  <section class="cd-tiles" id="kpis">
-    <div class="cd-card cd-tile"><span class="cd-label">B2B concessions (all) · <span class="t-month">—</span></span><span class="cd-big m-k dash-skeleton" data-source="kpis" data-field="b2b_concessions">—</span><span class="cd-sub">All B2B concessions logged</span></div>
-    <div class="cd-card cd-tile"><span class="cd-label">Tagged B2B tickets · <span class="t-month">—</span></span><span class="cd-big m-k dash-skeleton" data-source="kpis" data-field="tagged_tickets">—</span><span class="cd-sub t-tagnote">With a ticket category</span></div>
-    <div class="cd-card cd-tile"><span class="cd-label">Claimed · <span class="t-month">—</span></span><span class="cd-big m-k dash-skeleton" data-source="kpis" data-field="claimed">—</span><span class="cd-sub"><span class="m-share" data-source="kpi_shares" data-field="claimed_share">—</span> of tagged $</span></div>
-    <div class="cd-card cd-tile"><span class="cd-label">Non-claimed · <span class="t-month">—</span></span><span class="cd-big m-k dash-skeleton" data-source="kpis" data-field="non_claimed">—</span><span class="cd-sub"><span class="m-share" data-source="kpi_shares" data-field="nonclaimed_share">—</span> of tagged $</span></div>
-    <div class="cd-card cd-tile"><span class="cd-label">B2B noissue-fault · <span class="t-month">—</span></span><span class="cd-big m-fault dash-skeleton" data-source="fault_12m" data-field="b2b_total">—</span><span class="cd-sub"><span class="m-chg cd-delta" data-source="fault_change" data-field="b2b_change">—</span> vs <span class="t-prev">prior month</span></span></div>
-    <div class="cd-card cd-tile"><span class="cd-label">DTC noissue-fault · <span class="t-month">—</span></span><span class="cd-big m-fault dash-skeleton" data-source="fault_12m" data-field="dtc_total">—</span><span class="cd-sub"><span class="m-chg cd-delta" data-source="fault_change" data-field="dtc_change">—</span> vs <span class="t-prev">prior month</span></span></div>
+  <!-- OVERVIEW -->
+  <section class="cd-panel" id="overview" data-tab-panel="overview">
+    <div class="cd-tiles">
+      <div class="cd-card cd-tile"><span class="cd-label">B2B concessions (all) · <span class="t-month">—</span></span><span class="cd-big w-ms0" data-source="b2b_total" data-field="b2b_concessions">—</span><span class="cd-sub t-secnote">All B2B concessions logged</span></div>
+      <div class="cd-card cd-tile"><span class="cd-label">Tagged B2B tickets · <span class="t-month">—</span></span><span class="cd-big w-ms" data-source="ticket_totals" data-field="tagged_tickets">—</span><span class="cd-sub t-tagnote">With a ticket category</span></div>
+      <div class="cd-card cd-tile"><span class="cd-label">Claimed · <span class="t-month">—</span></span><span class="cd-big w-ms" data-source="ticket_totals" data-field="claimed">—</span><span class="cd-sub"><span class="w-ms" data-source="ticket_totals" data-field="claimed_share">—</span> of tagged $</span></div>
+      <div class="cd-card cd-tile"><span class="cd-label">Non-claimed · <span class="t-month">—</span></span><span class="cd-big w-ms" data-source="ticket_totals" data-field="non_claimed">—</span><span class="cd-sub"><span class="w-ms" data-source="ticket_totals" data-field="nonclaimed_share">—</span> of tagged $</span></div>
+      <div class="cd-card cd-tile"><span class="cd-label">B2B noissue-fault · <span class="t-month">—</span></span><span class="cd-big w-m" data-source="fault_12m" data-field="b2b_total">—</span><span class="cd-sub"><span class="w-m m-chg cd-delta" data-source="fault_change" data-field="b2b_change">—</span> vs <span class="t-prev">prior month</span></span></div>
+      <div class="cd-card cd-tile"><span class="cd-label">DTC noissue-fault · <span class="t-month">—</span></span><span class="cd-big w-m" data-source="fault_12m" data-field="dtc_total">—</span><span class="cd-sub"><span class="w-m m-chg cd-delta" data-source="fault_change" data-field="dtc_change">—</span> vs <span class="t-prev">prior month</span></span></div>
+    </div>
+    <div class="cd-row r-ov2">
+      <div class="cd-card" id="card-ov-dtc"><h2>noissue-fault concessions by reason — DTC</h2><div class="cd-legend" id="lg-ov-dtc"></div><div class="cd-chart dash-skeleton" id="ov-dtc" data-source="fault_12m"></div></div>
+      <div class="cd-card" id="card-ov-b2b"><h2>noissue-fault concessions by reason — B2B</h2><div class="cd-legend" id="lg-ov-b2b"></div><div class="cd-chart dash-skeleton" id="ov-b2b" data-source="fault_12m"></div></div>
+    </div>
+    <div class="cd-row r-ov3">
+      <div class="cd-card" id="card-ov-total"><h2>Total noissue-fault — DTC vs B2B</h2><div class="cd-legend" id="lg-ov-total"></div><div class="cd-chart dash-skeleton" id="ov-total" data-source="fault_12m"></div></div>
+      <div class="cd-card" id="card-ov-groups"><h2><span class="t-pietitle">Ticket category groups by amount</span> — B2B · <span class="t-scope">—</span></h2><div class="cd-chart dash-skeleton" id="ov-groups" data-source="group_totals category_totals"></div></div>
+      <div class="cd-card" id="card-ov-claim"><h2>Claimed vs non-claimed — B2B · <span class="t-scope">—</span></h2><div class="cd-legend" id="lg-ov-claim"></div><div class="cd-chart dash-skeleton" id="ov-claim" data-source="group_totals category_totals"></div></div>
+      <div class="cd-card" id="card-ov-ie"><h2>Internal-error concessions by ticket category — B2B · <span class="t-scope">—</span></h2><div class="cd-chart dash-skeleton" id="ov-ie" data-source="ie_by_category"></div></div>
+    </div>
   </section>
 
-  <div class="cd-row cd-row2">
-    <div class="cd-card" id="card-dtc">
-      <h2>noissue-fault concessions by reason — DTC</h2>
-      <div class="cd-legend" id="lg-dtc"></div>
-      <div class="cd-chart tall dash-skeleton" id="ch-dtc" data-source="fault_12m"></div>
+  <!-- B2B -->
+  <section class="cd-panel" id="b2b" data-tab-panel="b2b" hidden>
+    <div class="cd-tiles">
+      <div class="cd-card cd-tile"><span class="cd-label">B2B concessions (all) · <span class="t-month">—</span></span><span class="cd-big w-ms0" data-source="b2b_total" data-field="b2b_concessions">—</span><span class="cd-sub t-secnote">All B2B concessions logged</span></div>
+      <div class="cd-card cd-tile"><span class="cd-label">Tagged B2B tickets · <span class="t-month">—</span></span><span class="cd-big w-ms" data-source="ticket_totals" data-field="tagged_tickets">—</span><span class="cd-sub t-tagnote">With a ticket category</span></div>
+      <div class="cd-card cd-tile"><span class="cd-label">Claimed · <span class="t-month">—</span></span><span class="cd-big w-ms" data-source="ticket_totals" data-field="claimed">—</span><span class="cd-sub"><span class="w-ms" data-source="ticket_totals" data-field="claimed_share">—</span> of tagged $</span></div>
+      <div class="cd-card cd-tile"><span class="cd-label">Non-claimed · <span class="t-month">—</span></span><span class="cd-big w-ms" data-source="ticket_totals" data-field="non_claimed">—</span><span class="cd-sub"><span class="w-ms" data-source="ticket_totals" data-field="nonclaimed_share">—</span> of tagged $</span></div>
+      <div class="cd-card cd-tile"><span class="cd-label">Internal-error concessions · <span class="t-month">—</span></span><span class="cd-big w-ms" data-source="ticket_totals" data-field="internal_error">—</span><span class="cd-sub"><span class="w-ms" data-source="ticket_totals" data-field="internal_error_share">—</span> of all tagged $ this month</span></div>
+      <div class="cd-card cd-tile"><span class="cd-label">B2B noissue-fault · <span class="t-month">—</span></span><span class="cd-big w-m" data-source="fault_12m" data-field="b2b_total">—</span><span class="cd-sub"><span class="w-m m-chg cd-delta" data-source="fault_change" data-field="b2b_change">—</span> vs <span class="t-prev">prior month</span></span></div>
     </div>
-    <div class="cd-card" id="card-b2b">
-      <h2>noissue-fault concessions by reason — B2B</h2>
-      <div class="cd-legend" id="lg-b2b"></div>
-      <div class="cd-chart tall dash-skeleton" id="ch-b2b" data-source="fault_12m"></div>
+    <div class="cd-row r-b2">
+      <div class="cd-card" id="card-b2-bars"><h2>noissue-fault concessions by reason — B2B</h2><div class="cd-legend" id="lg-b2-bars"></div><div class="cd-chart dash-skeleton" id="b2-bars" data-source="fault_12m"></div></div>
+      <div class="cd-card" id="card-b2-line"><h2>B2B noissue-fault by month</h2><div class="cd-legend" id="lg-b2-line"></div><div class="cd-chart dash-skeleton" id="b2-line" data-source="fault_12m"></div></div>
     </div>
-  </div>
+    <div class="cd-row r-b3">
+      <div class="cd-card" id="card-b2-groups"><h2><span class="t-pietitle">Ticket category groups by amount</span> · <span class="t-scope">—</span></h2><div class="cd-chart dash-skeleton" id="b2-groups" data-source="group_totals category_totals"></div></div>
+      <div class="cd-card" id="card-b2-claim"><h2>Claimed vs non-claimed · <span class="t-scope">—</span></h2><div class="cd-legend" id="lg-b2-claim"></div><div class="cd-chart dash-skeleton" id="b2-claim" data-source="group_totals category_totals"></div></div>
+      <div class="cd-card" id="card-b2-ie"><h2>Internal-error concessions by ticket category · <span class="t-scope">—</span></h2><div class="cd-chart dash-skeleton" id="b2-ie" data-source="ie_by_category"></div></div>
+    </div>
+  </section>
 
-  <div class="cd-row cd-row3">
-    <div class="cd-card" id="card-total">
-      <h2>Total noissue-fault — DTC vs B2B</h2>
-      <div class="cd-legend" id="lg-total"></div>
-      <div class="cd-chart dash-skeleton" id="ch-total" data-source="fault_12m"></div>
+  <!-- DTC -->
+  <section class="cd-panel" id="dtc" data-tab-panel="dtc" hidden>
+    <div class="cd-tiles five">
+      <div class="cd-card cd-tile"><span class="cd-label">DTC noissue-fault · <span class="t-month">—</span></span><span class="cd-big w-m" data-source="fault_12m" data-field="dtc_total">—</span><span class="cd-sub"><span class="w-m m-chg cd-delta" data-source="fault_change" data-field="dtc_change">—</span> vs <span class="t-prev">prior month</span></span></div>
+      <div class="cd-card cd-tile"><span class="cd-label">Quality · <span class="t-month">—</span></span><span class="cd-big w-m" data-source="fault_12m" data-field="dtc_quality">—</span><span class="cd-sub"><span class="w-mr" data-reason="Quality" data-source="dtc_mix" data-field="share">—</span> of DTC noissue-fault</span></div>
+      <div class="cd-card cd-tile"><span class="cd-label">Delivery &amp; logistic · <span class="t-month">—</span></span><span class="cd-big w-m" data-source="fault_12m" data-field="dtc_delivery_logistic">—</span><span class="cd-sub"><span class="w-mr" data-reason="Delivery &amp; logistic" data-source="dtc_mix" data-field="share">—</span> of DTC noissue-fault</span></div>
+      <div class="cd-card cd-tile"><span class="cd-label">Customer / goodwill · <span class="t-month">—</span></span><span class="cd-big w-m" data-source="fault_12m" data-field="dtc_customer_goodwill">—</span><span class="cd-sub"><span class="w-mr" data-reason="Customer / goodwill" data-source="dtc_mix" data-field="share">—</span> of DTC noissue-fault</span></div>
+      <div class="cd-card cd-tile"><span class="cd-label">Internal error · <span class="t-month">—</span></span><span class="cd-big w-m" data-source="fault_12m" data-field="dtc_internal_error">—</span><span class="cd-sub"><span class="w-mr" data-reason="Internal error" data-source="dtc_mix" data-field="share">—</span> of DTC noissue-fault</span></div>
     </div>
-    <div class="cd-card" id="card-groups">
-      <h2>Ticket category groups by amount — B2B · <span class="t-month">—</span></h2>
-      <div class="cd-pie dash-skeleton" id="ch-groups" data-source="ticket_groups group_share"></div>
+    <div class="cd-row r-d2">
+      <div class="cd-card" id="card-dt-bars"><h2>noissue-fault concessions by reason — DTC</h2><div class="cd-legend" id="lg-dt-bars"></div><div class="cd-chart dash-skeleton" id="dt-bars" data-source="fault_12m"></div></div>
     </div>
-    <div class="cd-card" id="card-claim">
-      <h2>Claimed vs non-claimed — B2B · <span class="t-month">—</span></h2>
-      <div class="cd-legend" id="lg-claim"></div>
-      <div class="cd-chart dash-skeleton" id="ch-claim" data-source="ticket_groups"></div>
+    <div class="cd-row r-d3">
+      <div class="cd-card" id="card-dt-line"><h2>DTC noissue-fault by month</h2><div class="cd-legend" id="lg-dt-line"></div><div class="cd-chart dash-skeleton" id="dt-line" data-source="fault_12m"></div></div>
+      <div class="cd-card" id="card-dt-mix"><h2>DTC noissue-fault by reason · <span class="t-month">—</span></h2><div class="cd-chart dash-skeleton" id="dt-mix" data-source="dtc_mix"></div></div>
     </div>
-  </div>
+  </section>
 </div>
 </div>
 
@@ -167,8 +184,8 @@ html, body { margin: 0; background: #ffffff; color: #1f2a37; font-family: var(--
 </script>
 <script>
 (function () {
-  var DATA = {"kpis": [{"month": "2025-09", "b2b_concessions": "17199.51", "tagged_tickets": "", "claimed": "", "non_claimed": ""}, {"month": "2025-10", "b2b_concessions": "32896.46", "tagged_tickets": "", "claimed": "", "non_claimed": ""}, {"month": "2025-11", "b2b_concessions": "31752.89", "tagged_tickets": "", "claimed": "", "non_claimed": ""}, {"month": "2025-12", "b2b_concessions": "21704.15", "tagged_tickets": "", "claimed": "", "non_claimed": ""}, {"month": "2026-01", "b2b_concessions": "38851.96", "tagged_tickets": "", "claimed": "", "non_claimed": ""}, {"month": "2026-02", "b2b_concessions": "37535.93", "tagged_tickets": "", "claimed": "", "non_claimed": ""}, {"month": "2026-03", "b2b_concessions": "34641.1", "tagged_tickets": "", "claimed": "", "non_claimed": ""}, {"month": "2026-04", "b2b_concessions": "89816.14", "tagged_tickets": "", "claimed": "", "non_claimed": ""}, {"month": "2026-05", "b2b_concessions": "59824.66", "tagged_tickets": "", "claimed": "", "non_claimed": ""}, {"month": "2026-06", "b2b_concessions": "102120.4", "tagged_tickets": "", "claimed": "", "non_claimed": ""}, {"month": "2026-07", "b2b_concessions": "95445.55", "tagged_tickets": "", "claimed": "", "non_claimed": ""}, {"month": "2026-08", "b2b_concessions": "73850.34", "tagged_tickets": "", "claimed": "", "non_claimed": ""}, {"month": "2026-09", "b2b_concessions": "153504.56", "tagged_tickets": "76", "claimed": "55528.31", "non_claimed": "97948.74"}], "fault_12m": [{"month": "2025-09", "dtc_quality": "675", "dtc_delivery_logistic": "5917.74", "dtc_customer_goodwill": "4859.65", "dtc_internal_error": "771.78", "b2b_quality": "0", "b2b_delivery_logistic": "0", "b2b_customer_goodwill": "0", "b2b_internal_error": "1158.5", "dtc_total": "12224.17", "b2b_total": "1158.5"}, {"month": "2025-10", "dtc_quality": "0", "dtc_delivery_logistic": "6365.09", "dtc_customer_goodwill": "10636.09", "dtc_internal_error": "3071.01", "b2b_quality": "4309.07", "b2b_delivery_logistic": "0", "b2b_customer_goodwill": "0", "b2b_internal_error": "12188.34", "dtc_total": "20072.19", "b2b_total": "16497.41"}, {"month": "2025-11", "dtc_quality": "16.54", "dtc_delivery_logistic": "2506.96", "dtc_customer_goodwill": "3719.49", "dtc_internal_error": "1935.45", "b2b_quality": "0", "b2b_delivery_logistic": "703.28", "b2b_customer_goodwill": "0", "b2b_internal_error": "11870.87", "dtc_total": "8178.44", "b2b_total": "12574.15"}, {"month": "2025-12", "dtc_quality": "1480.55", "dtc_delivery_logistic": "1698.25", "dtc_customer_goodwill": "2517.14", "dtc_internal_error": "1254.76", "b2b_quality": "978.89", "b2b_delivery_logistic": "0", "b2b_customer_goodwill": "0", "b2b_internal_error": "9826.9", "dtc_total": "6950.7", "b2b_total": "10805.79"}, {"month": "2026-01", "dtc_quality": "562.02", "dtc_delivery_logistic": "2165.5", "dtc_customer_goodwill": "4134.9", "dtc_internal_error": "1525", "b2b_quality": "0", "b2b_delivery_logistic": "0", "b2b_customer_goodwill": "0", "b2b_internal_error": "28216.89", "dtc_total": "8387.42", "b2b_total": "28216.89"}, {"month": "2026-02", "dtc_quality": "499.79", "dtc_delivery_logistic": "2851.06", "dtc_customer_goodwill": "4515.87", "dtc_internal_error": "1682.05", "b2b_quality": "0", "b2b_delivery_logistic": "1207.87", "b2b_customer_goodwill": "0", "b2b_internal_error": "19181.32", "dtc_total": "9548.77", "b2b_total": "20389.19"}, {"month": "2026-03", "dtc_quality": "0", "dtc_delivery_logistic": "3394.23", "dtc_customer_goodwill": "3862.53", "dtc_internal_error": "2180.84", "b2b_quality": "0", "b2b_delivery_logistic": "0", "b2b_customer_goodwill": "0", "b2b_internal_error": "7543.97", "dtc_total": "9437.6", "b2b_total": "7543.97"}, {"month": "2026-04", "dtc_quality": "903.71", "dtc_delivery_logistic": "9571.06", "dtc_customer_goodwill": "7145.33", "dtc_internal_error": "803.31", "b2b_quality": "0", "b2b_delivery_logistic": "0", "b2b_customer_goodwill": "0", "b2b_internal_error": "42881.5", "dtc_total": "18423.41", "b2b_total": "42881.5"}, {"month": "2026-05", "dtc_quality": "215", "dtc_delivery_logistic": "1410.32", "dtc_customer_goodwill": "5483.83", "dtc_internal_error": "248.18", "b2b_quality": "0", "b2b_delivery_logistic": "0", "b2b_customer_goodwill": "0", "b2b_internal_error": "34546.89", "dtc_total": "7357.33", "b2b_total": "34546.89"}, {"month": "2026-06", "dtc_quality": "0", "dtc_delivery_logistic": "1031", "dtc_customer_goodwill": "1452.02", "dtc_internal_error": "1218.26", "b2b_quality": "0", "b2b_delivery_logistic": "0", "b2b_customer_goodwill": "0", "b2b_internal_error": "25265.54", "dtc_total": "3701.28", "b2b_total": "25265.54"}, {"month": "2026-07", "dtc_quality": "647.91", "dtc_delivery_logistic": "1767.5", "dtc_customer_goodwill": "1932.44", "dtc_internal_error": "1604.5", "b2b_quality": "0", "b2b_delivery_logistic": "0", "b2b_customer_goodwill": "0", "b2b_internal_error": "35577.02", "dtc_total": "5952.35", "b2b_total": "35577.02"}, {"month": "2026-08", "dtc_quality": "473.96", "dtc_delivery_logistic": "2769.38", "dtc_customer_goodwill": "1158.97", "dtc_internal_error": "3213.13", "b2b_quality": "0", "b2b_delivery_logistic": "6630.89", "b2b_customer_goodwill": "0", "b2b_internal_error": "29251.4", "dtc_total": "7615.44", "b2b_total": "35882.29"}, {"month": "2026-09", "dtc_quality": "52.25", "dtc_delivery_logistic": "4847.42", "dtc_customer_goodwill": "4009.61", "dtc_internal_error": "352.65", "b2b_quality": "30258.87", "b2b_delivery_logistic": "6542.45", "b2b_customer_goodwill": "7654.97", "b2b_internal_error": "33746.8", "dtc_total": "9261.93", "b2b_total": "78203.08"}], "ticket_groups": [{"month": "2026-09", "category_group": "Product Quality", "amount": "48887.83", "tickets": "18", "claimed": "6387.16", "non_claimed": "42500.67"}, {"month": "2026-09", "category_group": "Production", "amount": "45163.51", "tickets": "26", "claimed": "41353.62", "non_claimed": "3809.89"}, {"month": "2026-09", "category_group": "Pre-Press / Proof", "amount": "32349.32", "tickets": "6", "claimed": "2179.8", "non_claimed": "30169.52"}, {"month": "2026-09", "category_group": "Logistics & Shipping", "amount": "11908.91", "tickets": "9", "claimed": "4025.68", "non_claimed": "7883.22"}, {"month": "2026-09", "category_group": "Sales", "amount": "10904.25", "tickets": "13", "claimed": "0", "non_claimed": "10904.25"}, {"month": "2026-09", "category_group": "Supplier", "amount": "3935.24", "tickets": "3", "claimed": "1582.04", "non_claimed": "2353.2"}, {"month": "2026-09", "category_group": "Ops", "amount": "328", "tickets": "1", "claimed": "0", "non_claimed": "328"}]};
-  var calcs = {}, listeners = [], defaults = {month: '2026-09'}, params = Object.assign({}, defaults);
+  var DATA = {"kpis": [{"month": "2025-09", "section_group": "N/D", "b2b_concessions": "2178.0"}, {"month": "2025-09", "section_group": "Shipper", "b2b_concessions": "5243.86"}, {"month": "2025-09", "section_group": "Supplier", "b2b_concessions": "8619.15"}, {"month": "2025-09", "section_group": "noissue", "b2b_concessions": "1158.5"}, {"month": "2025-10", "section_group": "N/D", "b2b_concessions": "398.9"}, {"month": "2025-10", "section_group": "Shipper", "b2b_concessions": "7742.28"}, {"month": "2025-10", "section_group": "Supplier", "b2b_concessions": "8257.87"}, {"month": "2025-10", "section_group": "noissue", "b2b_concessions": "16497.41"}, {"month": "2025-11", "section_group": "CS, Pre-press & Ops team", "b2b_concessions": "3767.72"}, {"month": "2025-11", "section_group": "N/D", "b2b_concessions": "3664.07"}, {"month": "2025-11", "section_group": "Shipper", "b2b_concessions": "273.0"}, {"month": "2025-11", "section_group": "Supplier", "b2b_concessions": "11473.96"}, {"month": "2025-11", "section_group": "noissue", "b2b_concessions": "12574.15"}, {"month": "2025-12", "section_group": "N/D", "b2b_concessions": "1827.0"}, {"month": "2025-12", "section_group": "Shipper", "b2b_concessions": "3975.81"}, {"month": "2025-12", "section_group": "Supplier", "b2b_concessions": "5095.56"}, {"month": "2025-12", "section_group": "noissue", "b2b_concessions": "10805.79"}, {"month": "2026-01", "section_group": "CS, Pre-press & Ops team", "b2b_concessions": "2454.52"}, {"month": "2026-01", "section_group": "Shipper", "b2b_concessions": "328.32"}, {"month": "2026-01", "section_group": "Supplier", "b2b_concessions": "7852.23"}, {"month": "2026-01", "section_group": "noissue", "b2b_concessions": "28216.89"}, {"month": "2026-02", "section_group": "Shipper", "b2b_concessions": "2320.82"}, {"month": "2026-02", "section_group": "Supplier", "b2b_concessions": "14825.92"}, {"month": "2026-02", "section_group": "noissue", "b2b_concessions": "20389.19"}, {"month": "2026-03", "section_group": "CS, Pre-press & Ops team", "b2b_concessions": "1647.43"}, {"month": "2026-03", "section_group": "Shipper", "b2b_concessions": "1538.45"}, {"month": "2026-03", "section_group": "Supplier", "b2b_concessions": "23911.26"}, {"month": "2026-03", "section_group": "noissue", "b2b_concessions": "7543.97"}, {"month": "2026-04", "section_group": "CS, Pre-press & Ops team", "b2b_concessions": "2588.43"}, {"month": "2026-04", "section_group": "N/D", "b2b_concessions": "3634.9"}, {"month": "2026-04", "section_group": "Shipper", "b2b_concessions": "5995.13"}, {"month": "2026-04", "section_group": "Supplier", "b2b_concessions": "34716.18"}, {"month": "2026-04", "section_group": "noissue", "b2b_concessions": "42881.5"}, {"month": "2026-05", "section_group": "Shipper", "b2b_concessions": "1013.99"}, {"month": "2026-05", "section_group": "Supplier", "b2b_concessions": "24263.78"}, {"month": "2026-05", "section_group": "noissue", "b2b_concessions": "34546.89"}, {"month": "2026-06", "section_group": "CS, Pre-press & Ops team", "b2b_concessions": "4877.78"}, {"month": "2026-06", "section_group": "Shipper", "b2b_concessions": "1760.31"}, {"month": "2026-06", "section_group": "Supplier", "b2b_concessions": "70216.77"}, {"month": "2026-06", "section_group": "noissue", "b2b_concessions": "25265.54"}, {"month": "2026-07", "section_group": "Shipper", "b2b_concessions": "197.4"}, {"month": "2026-07", "section_group": "Supplier", "b2b_concessions": "59671.14"}, {"month": "2026-07", "section_group": "noissue", "b2b_concessions": "35577.02"}, {"month": "2026-08", "section_group": "Shipper", "b2b_concessions": "296.92"}, {"month": "2026-08", "section_group": "Supplier", "b2b_concessions": "37671.13"}, {"month": "2026-08", "section_group": "noissue", "b2b_concessions": "35882.29"}, {"month": "2026-09", "section_group": "Shipper", "b2b_concessions": "1512.47"}, {"month": "2026-09", "section_group": "Supplier", "b2b_concessions": "73789.01"}, {"month": "2026-09", "section_group": "noissue", "b2b_concessions": "78203.08"}], "fault_12m": [{"month": "2025-09", "dtc_quality": "675", "dtc_delivery_logistic": "5917.74", "dtc_customer_goodwill": "4859.65", "dtc_internal_error": "771.78", "b2b_quality": "0", "b2b_delivery_logistic": "0", "b2b_customer_goodwill": "0", "b2b_internal_error": "1158.5", "dtc_total": "12224.17", "b2b_total": "1158.5"}, {"month": "2025-10", "dtc_quality": "0", "dtc_delivery_logistic": "6365.09", "dtc_customer_goodwill": "10636.09", "dtc_internal_error": "3071.01", "b2b_quality": "4309.07", "b2b_delivery_logistic": "0", "b2b_customer_goodwill": "0", "b2b_internal_error": "12188.34", "dtc_total": "20072.19", "b2b_total": "16497.41"}, {"month": "2025-11", "dtc_quality": "16.54", "dtc_delivery_logistic": "2506.96", "dtc_customer_goodwill": "3719.49", "dtc_internal_error": "1935.45", "b2b_quality": "0", "b2b_delivery_logistic": "703.28", "b2b_customer_goodwill": "0", "b2b_internal_error": "11870.87", "dtc_total": "8178.44", "b2b_total": "12574.15"}, {"month": "2025-12", "dtc_quality": "1480.55", "dtc_delivery_logistic": "1698.25", "dtc_customer_goodwill": "2517.14", "dtc_internal_error": "1254.76", "b2b_quality": "978.89", "b2b_delivery_logistic": "0", "b2b_customer_goodwill": "0", "b2b_internal_error": "9826.9", "dtc_total": "6950.7", "b2b_total": "10805.79"}, {"month": "2026-01", "dtc_quality": "562.02", "dtc_delivery_logistic": "2165.5", "dtc_customer_goodwill": "4134.9", "dtc_internal_error": "1525", "b2b_quality": "0", "b2b_delivery_logistic": "0", "b2b_customer_goodwill": "0", "b2b_internal_error": "28216.89", "dtc_total": "8387.42", "b2b_total": "28216.89"}, {"month": "2026-02", "dtc_quality": "499.79", "dtc_delivery_logistic": "2851.06", "dtc_customer_goodwill": "4515.87", "dtc_internal_error": "1682.05", "b2b_quality": "0", "b2b_delivery_logistic": "1207.87", "b2b_customer_goodwill": "0", "b2b_internal_error": "19181.32", "dtc_total": "9548.77", "b2b_total": "20389.19"}, {"month": "2026-03", "dtc_quality": "0", "dtc_delivery_logistic": "3394.23", "dtc_customer_goodwill": "3862.53", "dtc_internal_error": "2180.84", "b2b_quality": "0", "b2b_delivery_logistic": "0", "b2b_customer_goodwill": "0", "b2b_internal_error": "7543.97", "dtc_total": "9437.6", "b2b_total": "7543.97"}, {"month": "2026-04", "dtc_quality": "903.71", "dtc_delivery_logistic": "9571.06", "dtc_customer_goodwill": "7145.33", "dtc_internal_error": "803.31", "b2b_quality": "0", "b2b_delivery_logistic": "0", "b2b_customer_goodwill": "0", "b2b_internal_error": "42881.5", "dtc_total": "18423.41", "b2b_total": "42881.5"}, {"month": "2026-05", "dtc_quality": "215", "dtc_delivery_logistic": "1410.32", "dtc_customer_goodwill": "5483.83", "dtc_internal_error": "248.18", "b2b_quality": "0", "b2b_delivery_logistic": "0", "b2b_customer_goodwill": "0", "b2b_internal_error": "34546.89", "dtc_total": "7357.33", "b2b_total": "34546.89"}, {"month": "2026-06", "dtc_quality": "0", "dtc_delivery_logistic": "1031", "dtc_customer_goodwill": "1452.02", "dtc_internal_error": "1218.26", "b2b_quality": "0", "b2b_delivery_logistic": "0", "b2b_customer_goodwill": "0", "b2b_internal_error": "25265.54", "dtc_total": "3701.28", "b2b_total": "25265.54"}, {"month": "2026-07", "dtc_quality": "647.91", "dtc_delivery_logistic": "1767.5", "dtc_customer_goodwill": "1932.44", "dtc_internal_error": "1604.5", "b2b_quality": "0", "b2b_delivery_logistic": "0", "b2b_customer_goodwill": "0", "b2b_internal_error": "35577.02", "dtc_total": "5952.35", "b2b_total": "35577.02"}, {"month": "2026-08", "dtc_quality": "473.96", "dtc_delivery_logistic": "2769.38", "dtc_customer_goodwill": "1158.97", "dtc_internal_error": "3213.13", "b2b_quality": "0", "b2b_delivery_logistic": "6630.89", "b2b_customer_goodwill": "0", "b2b_internal_error": "29251.4", "dtc_total": "7615.44", "b2b_total": "35882.29"}, {"month": "2026-09", "dtc_quality": "52.25", "dtc_delivery_logistic": "4847.42", "dtc_customer_goodwill": "4009.61", "dtc_internal_error": "352.65", "b2b_quality": "30258.87", "b2b_delivery_logistic": "6542.45", "b2b_customer_goodwill": "7654.97", "b2b_internal_error": "33746.8", "dtc_total": "9261.93", "b2b_total": "78203.08"}], "tickets": [{"month": "2026-09", "ticket_category": "Product Quality: Manufacturing Defect", "category_group": "Product Quality", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "38.6"}, {"month": "2026-09", "ticket_category": "Product Quality: Incorrect Design Printed", "category_group": "Product Quality", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "N", "amount": "2888"}, {"month": "2026-09", "ticket_category": "Sales Omission: Failed Notification to Operations", "category_group": "Sales", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "Y", "amount": "765.3419"}, {"month": "2026-09", "ticket_category": "Logistics & Shipping: Lost in Transit", "category_group": "Logistics & Shipping", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "68"}, {"month": "2026-09", "ticket_category": "Supplier Transition Specification Drift:", "category_group": "Supplier", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "N", "amount": "2353.2"}, {"month": "2026-09", "ticket_category": "Pre-Press Error: Artwork File Non-Conformance", "category_group": "Pre-Press / Proof", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "Y", "amount": "8280"}, {"month": "2026-09", "ticket_category": "Production Delay", "category_group": "Production", "section_group": "Supplier", "claim_status": "Non-claimed", "internal_error": "N", "amount": "2390.66"}, {"month": "2026-09", "ticket_category": "Product Quality: Quality or Specification Not Correct", "category_group": "Product Quality", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "209.6"}, {"month": "2026-09", "ticket_category": "Production Delay", "category_group": "Production", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "435.77"}, {"month": "2026-09", "ticket_category": "Sales Omission: Failed Notification to Operations", "category_group": "Sales", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "Y", "amount": "707.5884"}, {"month": "2026-09", "ticket_category": "Logistics & Shipping: Lost in Transit", "category_group": "Logistics & Shipping", "section_group": "Shipper", "claim_status": "Claimed", "internal_error": "N", "amount": "232.5"}, {"month": "2026-09", "ticket_category": "Production Quality: Incorrect Color", "category_group": "Product Quality", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "N", "amount": "0"}, {"month": "2026-09", "ticket_category": "Production Issue: Underage", "category_group": "Production", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "919.04"}, {"month": "2026-09", "ticket_category": "Production Delay", "category_group": "Production", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "3329.8332"}, {"month": "2026-09", "ticket_category": "Sales Omission: Failed Notification to Operations", "category_group": "Sales", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "Y", "amount": "786.29"}, {"month": "2026-09", "ticket_category": "Logistics & Shipping: Lost in Transit", "category_group": "Logistics & Shipping", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "N", "amount": "614.1514"}, {"month": "2026-09", "ticket_category": "Sales Discretionary Request: Customer Deadline Accomodation", "category_group": "Sales", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "N", "amount": "453.72"}, {"month": "2026-09", "ticket_category": "Supplier Process Failure: Delayed Processing", "category_group": "Supplier", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "1582.04"}, {"month": "2026-09", "ticket_category": "Sales Discretionary Request: Customer Deadline Accomodation", "category_group": "Sales", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "N", "amount": "256.1254"}, {"month": "2026-09", "ticket_category": "Logistics & Shipping: Delivery Arrived Damaged", "category_group": "Logistics & Shipping", "section_group": "Shipper", "claim_status": "Claimed", "internal_error": "N", "amount": "372"}, {"month": "2026-09", "ticket_category": "Sales Discretionary Request: Customer Deadline Accomodation", "category_group": "Sales", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "N", "amount": "640.15"}, {"month": "2026-09", "ticket_category": "Pre-Press Error: Artwork File Non-Conformance", "category_group": "Pre-Press / Proof", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "Y", "amount": "15104.32"}, {"month": "2026-09", "ticket_category": "Production Delay", "category_group": "Production", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "343.582"}, {"month": "2026-09", "ticket_category": "Sales Discretionary Request: Goodwill", "category_group": "Sales", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "N", "amount": "206"}, {"month": "2026-09", "ticket_category": "Sales Discretionary Request: Goodwill", "category_group": "Sales", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "N", "amount": "793.15"}, {"month": "2026-09", "ticket_category": "Production Delay", "category_group": "Production", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "3826.55"}, {"month": "2026-09", "ticket_category": "Production Delay", "category_group": "Production", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "1971.6831"}, {"month": "2026-09", "ticket_category": "Logistics & Warehouse: Inventory Visibility", "category_group": "Logistics & Shipping", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "N", "amount": "4509.07"}, {"month": "2026-09", "ticket_category": "Production Delay", "category_group": "Production", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "5088.65"}, {"month": "2026-09", "ticket_category": "QC Photo Approval Delay", "category_group": "Production", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "N", "amount": "0"}, {"month": "2026-09", "ticket_category": "Sales Discretionary Request: Goodwill", "category_group": "Sales", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "N", "amount": "3175.62"}, {"month": "2026-09", "ticket_category": "Product Quality: Incorrect Design Printed", "category_group": "Product Quality", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "N", "amount": "2816"}, {"month": "2026-09", "ticket_category": "Sales Discretionary Request: Customer Deadline Accomodation", "category_group": "Sales", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "N", "amount": "1906.2"}, {"month": "2026-09", "ticket_category": "Product Quality: Manufacturing Defect", "category_group": "Product Quality", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "208.3444"}, {"month": "2026-09", "ticket_category": "Production Issue: Underage", "category_group": "Production", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "589.79"}, {"month": "2026-09", "ticket_category": "Production Delay", "category_group": "Production", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "466.96"}, {"month": "2026-09", "ticket_category": "Production Delay", "category_group": "Production", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "445.6877"}, {"month": "2026-09", "ticket_category": "Production Delay", "category_group": "Production", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "515.3936"}, {"month": "2026-09", "ticket_category": "Production Delay", "category_group": "Production", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "2083.59"}, {"month": "2026-09", "ticket_category": "Product Quality: Quality or Specification Not Correct", "category_group": "Product Quality", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "N", "amount": "4570.29"}, {"month": "2026-09", "ticket_category": "Product Quality: Quality or Specification Not Correct", "category_group": "Product Quality", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "N", "amount": "7833.6859"}, {"month": "2026-09", "ticket_category": "Ops Oversight", "category_group": "Ops", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "Y", "amount": "328"}, {"month": "2026-09", "ticket_category": "Production Delay", "category_group": "Production", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "298.1874"}, {"month": "2026-09", "ticket_category": "Production Delay", "category_group": "Production", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "N", "amount": "1419.23"}, {"month": "2026-09", "ticket_category": "Production Delay", "category_group": "Production", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "571.5422"}, {"month": "2026-09", "ticket_category": "Production Delay", "category_group": "Production", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "735.9813"}, {"month": "2026-09", "ticket_category": "Production Delay", "category_group": "Production", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "1431.9728"}, {"month": "2026-09", "ticket_category": "Production Delay", "category_group": "Production", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "10278.2499"}, {"month": "2026-09", "ticket_category": "Production Delay", "category_group": "Production", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "665.08"}, {"month": "2026-09", "ticket_category": "Production Delay", "category_group": "Production", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "2407.46"}, {"month": "2026-09", "ticket_category": "Production Delay", "category_group": "Production", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "2006.18"}, {"month": "2026-09", "ticket_category": "Product Quality: Manufacturing Defect", "category_group": "Product Quality", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "489.6"}, {"month": "2026-09", "ticket_category": "Logistics & Shipping: Delivery Arrived Damaged", "category_group": "Logistics & Shipping", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "2083.6198"}, {"month": "2026-09", "ticket_category": "Sales Discretionary Request: Goodwill", "category_group": "Sales", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "N", "amount": "224"}, {"month": "2026-09", "ticket_category": "Production Quality: Incorrect Color", "category_group": "Product Quality", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "N", "amount": "617.66"}, {"month": "2026-09", "ticket_category": "Approved Proof Oversight:", "category_group": "Pre-Press / Proof", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "Y", "amount": "3143.2"}, {"month": "2026-09", "ticket_category": "Cross-Departmental Miscommunication: Sales to Ops Hand-off", "category_group": "Sales", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "Y", "amount": "313.262"}, {"month": "2026-09", "ticket_category": "Product Quality: Manufacturing Defect", "category_group": "Product Quality", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "870"}, {"month": "2026-09", "ticket_category": "Product Quality: Manufacturing Defect", "category_group": "Product Quality", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "1906.2"}, {"month": "2026-09", "ticket_category": "Product Quality: Reorder Color Variance", "category_group": "Product Quality", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "1050"}, {"month": "2026-09", "ticket_category": "Approved Proof Oversight:", "category_group": "Pre-Press / Proof", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "Y", "amount": "1500"}, {"month": "2026-09", "ticket_category": "Customs Clearance Rejection/Hold", "category_group": "Logistics & Shipping", "section_group": "Supplier", "claim_status": "Non-claimed", "internal_error": "N", "amount": "2760"}, {"month": "2026-09", "ticket_category": "Production Quality: Incorrect Color", "category_group": "Product Quality", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "1614.8153"}, {"month": "2026-09", "ticket_category": "Product Quality: Manufacturing Defect", "category_group": "Product Quality", "section_group": "Supplier", "claim_status": "Non-claimed", "internal_error": "N", "amount": "14595"}, {"month": "2026-09", "ticket_category": "Sales Account Management Error", "category_group": "Sales", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "Y", "amount": "676.8"}, {"month": "2026-09", "ticket_category": "Production Quality: Incorrect Color", "category_group": "Product Quality", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "N", "amount": "2000"}, {"month": "2026-09", "ticket_category": "Production Delay", "category_group": "Production", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "678.15"}, {"month": "2026-09", "ticket_category": "Logistics & Shipping: Delivery Arrived Damaged", "category_group": "Logistics & Shipping", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "361.6"}, {"month": "2026-09", "ticket_category": "Approved Proof Oversight:", "category_group": "Pre-Press / Proof", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "Y", "amount": "2179.8"}, {"month": "2026-09", "ticket_category": "Product Quality: Texture Defect", "category_group": "Product Quality", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "N", "amount": "5130"}, {"month": "2026-09", "ticket_category": "Product Quality: Quality or Specification Not Correct", "category_group": "Product Quality", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "N", "amount": "2050.03"}, {"month": "2026-09", "ticket_category": "Logistics & Shipping: Delivery Arrived Damaged", "category_group": "Logistics & Shipping", "section_group": "Shipper", "claim_status": "Claimed", "internal_error": "N", "amount": "907.965"}, {"month": "2026-09", "ticket_category": "Production Delay", "category_group": "Production", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "901.765"}, {"month": "2026-09", "ticket_category": "Approved Proof Oversight:", "category_group": "Pre-Press / Proof", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "Y", "amount": "2142"}, {"month": "2026-09", "ticket_category": "Supplier Transition Specification Drift:", "category_group": "Supplier", "section_group": "noissue", "claim_status": "Non-claimed", "internal_error": "N", "amount": "0"}, {"month": "2026-09", "ticket_category": "Production Delay", "category_group": "Production", "section_group": "Supplier", "claim_status": "Claimed", "internal_error": "N", "amount": "1362.523"}]};
+  var calcs = {}, listeners = [], defaults = {month: '2026-09', section: 'all', group: 'all'}, params = Object.assign({}, defaults);
   function cols(rows) { return rows.length ? Object.keys(rows[0]) : []; }
   function get(id) {
     if (DATA[id]) return {status: 'ok', data: DATA[id], columns: cols(DATA[id]), refreshing: false, meta: []};
@@ -207,17 +224,99 @@ html, body { margin: 0; background: #ffffff; color: #1f2a37; font-family: var(--
   const monthLabel = d3.utcFormat('%b %y');
   const monthLong = d3.utcFormat('%B %Y');
   const monthShort = d3.utcFormat('%b %Y');
-  const num = (v) => (v === '' || v == null || isNaN(Number(v)) ? null : Number(v));
-  const DEFAULT_MONTH = '2026-09';
+  const mk = (r) => String(r.month).slice(0, 7);
+  const DEFAULTS = {month: '2026-09', section: 'all', group: 'all'};
+  const secName = (s) => (s === 'all' ? 'All sections' : s);
+  const grpName = (g) => (g === 'all' ? 'All groups' : g);
+  const cleanCat = (s) => String(s).replace(/:\s*$/, '');
+  const shortCat = (s) => { const c = cleanCat(s), i = c.indexOf(': '); return i > 0 ? c.slice(i + 2) : c; };
 
-  dash.calc('kpi_shares', {
-    title: 'Claimed share of tagged B2B $',
-    description: 'Claimed and non-claimed as a share of their sum, per month (only months with tagged tickets have values).',
+  // ---------- calculations ----------
+  dash.calc('b2b_total', {
+    title: 'B2B concessions by section',
+    description: 'Monthly B2B concession total per section group, plus an "all" row that sums every section.',
     inputs: ['kpis'],
-    fn: (kpis) => kpis.map((r) => {
-      const c = Number(r.claimed), n = Number(r.non_claimed), ok = r.claimed !== '' && r.claimed != null && c + n > 0;
-      return {month: r.month, claimed_share: ok ? c / (c + n) : null, nonclaimed_share: ok ? n / (c + n) : null};
-    })
+    fn: (kpis) => {
+      const out = kpis.map((r) => ({month: r.month, section: r.section_group, b2b_concessions: Number(r.b2b_concessions)}));
+      d3.rollups(kpis, (v) => d3.sum(v, (r) => Number(r.b2b_concessions)), (r) => r.month).forEach(([month, v]) => out.push({month, section: 'all', b2b_concessions: v}));
+      return out;
+    }
+  });
+  dash.calc('ticket_totals', {
+    title: 'Tagged B2B ticket totals',
+    description: 'Per month, section and category group (each also as "all"): tagged tickets, claimed and non-claimed $, their shares, and internal-error $ as a share of all tagged $ that month.',
+    inputs: ['tickets'],
+    fn: (tickets) => {
+      const allTagged = d3.rollup(tickets, (v) => d3.sum(v, (r) => Number(r.amount)), (r) => r.month);
+      const sum = (v, f) => d3.sum(v.filter(f), (r) => Number(r.amount));
+      const make = (month, section, group, v) => {
+        const c = sum(v, (r) => r.claim_status === 'Claimed'), n = sum(v, (r) => r.claim_status === 'Non-claimed'), ie = sum(v, (r) => r.internal_error === 'Y');
+        return {month, section, group, tagged_tickets: v.length, claimed: c, non_claimed: n, claimed_share: c + n ? c / (c + n) : null, nonclaimed_share: c + n ? n / (c + n) : null, internal_error: ie, internal_error_share: ie / allTagged.get(month)};
+      };
+      const out = [];
+      d3.groups(tickets, (r) => r.month).forEach(([month, v]) => {
+        const bySec = [['all', v], ...d3.groups(v, (r) => r.section_group)];
+        bySec.forEach(([section, w]) => {
+          out.push(make(month, section, 'all', w));
+          d3.groups(w, (r) => r.category_group).forEach(([group, x]) => out.push(make(month, section, group, x)));
+        });
+      });
+      return out;
+    }
+  });
+  dash.calc('category_totals', {
+    title: 'Ticket categories within a group',
+    description: 'Per month, section (and "all") and ticket category: its category group, amount, tickets, claimed and non-claimed $, and share of its group’s $.',
+    inputs: ['tickets'],
+    fn: (tickets) => {
+      const out = [];
+      d3.groups(tickets, (r) => r.month).forEach(([month, v]) => {
+        [['all', v], ...d3.groups(v, (r) => r.section_group)].forEach(([section, w]) => {
+          d3.groups(w, (r) => r.category_group).forEach(([category_group, x]) => {
+            const gt = d3.sum(x, (r) => Number(r.amount));
+            d3.groups(x, (r) => r.ticket_category).forEach(([ticket_category, y]) => {
+              const amt = d3.sum(y, (r) => Number(r.amount));
+              out.push({month, section, category_group, ticket_category, amount: amt, tickets: y.length,
+                claimed: d3.sum(y.filter((r) => r.claim_status === 'Claimed'), (r) => Number(r.amount)),
+                non_claimed: d3.sum(y.filter((r) => r.claim_status === 'Non-claimed'), (r) => Number(r.amount)),
+                share: gt ? amt / gt : null});
+            });
+          });
+        });
+      });
+      return out;
+    }
+  });
+  dash.calc('group_totals', {
+    title: 'Ticket category groups',
+    description: 'Per month, section (and "all") and category group: amount, tickets, claimed and non-claimed $, and share of that month’s tagged $ in the section.',
+    inputs: ['tickets'],
+    fn: (tickets) => {
+      const out = [];
+      const build = (month, section, v) => {
+        const tot = d3.sum(v, (r) => Number(r.amount));
+        d3.groups(v, (r) => r.category_group).forEach(([category_group, w]) => {
+          const amt = d3.sum(w, (r) => Number(r.amount));
+          out.push({month, section, category_group, amount: amt, tickets: w.length,
+            claimed: d3.sum(w.filter((r) => r.claim_status === 'Claimed'), (r) => Number(r.amount)),
+            non_claimed: d3.sum(w.filter((r) => r.claim_status === 'Non-claimed'), (r) => Number(r.amount)),
+            share: tot ? amt / tot : null});
+        });
+      };
+      d3.groups(tickets, (r) => r.month).forEach(([month, v]) => { build(month, 'all', v); d3.groups(v, (r) => r.section_group).forEach(([s, w]) => build(month, s, w)); });
+      return out;
+    }
+  });
+  dash.calc('ie_by_category', {
+    title: 'Internal-error by ticket category',
+    description: 'Internal-error ticket categories (as listed in the workbook): amount and tickets per month and section (and "all").',
+    inputs: ['tickets'],
+    fn: (tickets) => {
+      const ie = tickets.filter((r) => r.internal_error === 'Y'), out = [];
+      const build = (month, section, v) => d3.groups(v, (r) => r.ticket_category).forEach(([ticket_category, w]) => out.push({month, section, ticket_category, category_group: w[0].category_group, amount: d3.sum(w, (r) => Number(r.amount)), tickets: w.length}));
+      d3.groups(ie, (r) => r.month).forEach(([month, v]) => { build(month, 'all', v); d3.groups(v, (r) => r.section_group).forEach(([s, w]) => build(month, s, w)); });
+      return out;
+    }
   });
   dash.calc('fault_change', {
     title: 'noissue-fault change vs prior month',
@@ -235,34 +334,29 @@ html, body { margin: 0; background: #ffffff; color: #1f2a37; font-family: var(--
       });
     }
   });
-  dash.calc('group_share', {
-    title: 'Ticket group share of tagged $',
-    description: 'Each category group amount divided by that month’s tagged B2B total.',
-    inputs: ['ticket_groups'],
-    fn: (ticket_groups) => {
-      const tot = d3.rollup(ticket_groups, (v) => d3.sum(v, (r) => Number(r.amount)), (r) => r.month);
-      return ticket_groups.map((r) => ({month: r.month, category_group: r.category_group, share: Number(r.amount) / tot.get(r.month)}));
+  dash.calc('dtc_mix', {
+    title: 'DTC noissue-fault mix by reason',
+    description: 'Each DTC concession reason’s amount per month and its share of that month’s DTC noissue-fault total.',
+    inputs: ['fault_12m'],
+    fn: (fault_12m) => {
+      const reasons = [['Quality', 'dtc_quality'], ['Delivery & logistic', 'dtc_delivery_logistic'], ['Customer / goodwill', 'dtc_customer_goodwill'], ['Internal error', 'dtc_internal_error']];
+      return fault_12m.flatMap((r) => reasons.map(([reason, k]) => ({month: r.month, reason, amount: Number(r[k]), share: Number(r.dtc_total) ? Number(r[k]) / Number(r.dtc_total) : null})));
     }
   });
 
-  // Colours taken from the workbook's charts
+  // ---------- palette (from the workbook) ----------
   const BLUES = ['#17375E', '#2F5597', '#4A6FB5', '#6F8FCB', '#8EA9DB', '#A9BDE3', '#D6E0F2'];
   const LINE = {b2b: '#17375E', dtc: '#8EA9DB'};
   const DTC_REASON = ['#A9BDE3', '#8EA9DB', '#6F8FCB', '#D6E0F2'];
   const B2B_REASON = ['#17375E', '#2F5597', '#4A6FB5', '#8EA9DB'];
+  const REASONS = ['Quality', 'Delivery & logistic', 'Customer / goodwill', 'Internal error'];
   const GROUP_ORDER = ['Product Quality', 'Production', 'Pre-Press / Proof', 'Logistics & Shipping', 'Sales', 'Supplier', 'Ops'];
   const groupColor = (g, i) => { const k = GROUP_ORDER.indexOf(g); return BLUES[(k >= 0 ? k : i) % BLUES.length]; };
+  const groupSort = (a, b) => { const ia = GROUP_ORDER.indexOf(a), ib = GROUP_ORDER.indexOf(b); return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib); };
   const inkOn = (hex) => { const c = d3.rgb(hex); return (0.299 * c.r + 0.587 * c.g + 0.114 * c.b) > 150 ? '#17375E' : '#ffffff'; };
   const CAP = '11px';
 
-  // Month filter
-  const sel = document.getElementById('f-month'), reset = document.getElementById('f-reset');
-  const curMonth = () => dash.params().month || DEFAULT_MONTH;
-  sel.addEventListener('change', () => dash.setParams({month: sel.value}));
-  reset.addEventListener('click', () => { dash.resetParams(); dash.setParams({month: DEFAULT_MONTH}); });
-  const setMonth = (m) => dash.setParams({month: m});
-
-  const setText = (sel2, fn) => document.querySelectorAll(sel2).forEach(fn);
+  // ---------- helpers ----------
   const fail = (el) => { el.innerHTML = ''; const d = document.createElement('div'); d.className = 'cd-fail'; d.textContent = 'Failed to load'; el.appendChild(d); };
   const emptyMsg = (el, text) => { el.innerHTML = ''; const d = document.createElement('div'); d.className = 'cd-empty'; d.textContent = text; el.appendChild(d); };
   const legend = (id, items) => {
@@ -286,6 +380,12 @@ html, body { margin: 0; background: #ffffff; color: #1f2a37; font-family: var(--
     tip.style.left = left + 'px'; tip.style.top = Math.max(0, y - 10) + 'px';
   };
   const cleanAxis = (g) => { g.attr('font-size', null).attr('font-family', null); g.selectAll('text').attr('fill', 'var(--color-fg-muted)').style('font-size', CAP); g.select('.domain').remove(); g.selectAll('line').remove(); };
+  const boxH = (box, d) => (box.clientHeight > 100 ? box.clientHeight : d);
+  function measure(svg, labels, weight) {
+    const t = svg.append('text').style('font-size', CAP).style('font-weight', weight || null);
+    let w = 0; labels.forEach((l) => { t.text(l); w = Math.max(w, t.node().getComputedTextLength()); });
+    t.remove(); return w;
+  }
   const SEG = '10px';
   const segText = (v) => '$' + d3.format('.1f')(v / 1000) + 'K';
   const measureSeg = (svg, t) => { const n = svg.append('text').style('font-size', SEG).style('font-weight', 700).text(t); const w = n.node().getComputedTextLength(); n.remove(); return w; };
@@ -300,47 +400,40 @@ html, body { margin: 0; background: #ffffff; color: #1f2a37; font-family: var(--
         .attr('fill', segInk(color)).style('font-size', SEG).style('font-weight', 700).text(t);
     }
   };
-  const boxH = (box, d) => (box.clientHeight > 100 ? box.clientHeight : d);
-  function measure(svg, labels, weight) {
-    const t = svg.append('text').style('font-size', CAP).style('font-weight', weight || null);
-    let w = 0; labels.forEach((l) => { t.text(l); w = Math.max(w, t.node().getComputedTextLength()); });
-    t.remove(); return w;
-  }
+  const fit = (svg, text, maxW, weight) => {
+    if (measure(svg, [text], weight) <= maxW) return text;
+    let s = text; while (s.length > 1 && measure(svg, [s + '…'], weight) > maxW) s = s.slice(0, -1);
+    return s + '…';
+  };
 
-  function stacked(box, rows, keys, names, cols, month) {
+  // ---------- charts ----------
+  function stacked(box, rows, keys, names, cols) {
     box.innerHTML = '';
-    const W = box.clientWidth, H = boxH(box, 360);
+    const W = box.clientWidth, H = boxH(box, 300);
     const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
-    const data = rows.map((r) => { const o = {month: String(r.month).slice(0, 7), date: parseMonth(r.month)}; keys.forEach((k) => (o[k] = Number(r[k]) || 0)); o.total = d3.sum(keys, (k) => o[k]); return o; });
+    const data = rows.map((r) => { const o = {month: mk(r), date: parseMonth(r.month)}; keys.forEach((k) => (o[k] = Number(r[k]) || 0)); o.total = d3.sum(keys, (k) => o[k]); return o; });
     const y0 = d3.scaleLinear([0, d3.max(data, (d) => d.total) || 1], [0, 1]).nice();
     const ticks = y0.ticks(4);
-    const ml = measure(svg, ticks.map(money)) + 8, mb = 22, mr = 4;
+    const ml = measure(svg, ticks.map(money)) + 8, mb = 22, mr = 4, mt = 6;
     const x = d3.scaleBand(data.map((d) => d.month), [ml, W - mr]).padding(0.08);
-    const totLabels = data.map((d) => lbl(d.total));
-    const lw = measure(svg, totLabels, 500);
-    const rotate = lw > x.step() - 3;
-    const mt = 6;
     const y = d3.scaleLinear(y0.domain(), [H - mb, mt]);
     svg.append('g').selectAll('line').data(ticks).join('line').attr('x1', ml).attr('x2', W - mr).attr('y1', y).attr('y2', y).attr('stroke', 'var(--cds-chart-grid)');
     const ya = svg.append('g').attr('transform', `translate(${ml - 6},0)`).call(d3.axisLeft(y).tickValues(ticks).tickFormat(money).tickSize(0)); cleanAxis(ya);
     const every = Math.ceil(data.length / Math.max(1, Math.floor((W - ml) / 48)));
     const xa = svg.append('g').attr('transform', `translate(0,${H - mb + 6})`).call(d3.axisBottom(x).tickFormat((m) => monthLabel(parseMonth(m))).tickSize(0).tickValues(x.domain().filter((m, i) => (data.length - 1 - i) % every === 0))); cleanAxis(xa);
-    const bw = Math.min(48, x.bandwidth()), off = (x.bandwidth() - bw) / 2;
-    const fade = () => 1;
+    const bw = Math.min(56, x.bandwidth()), off = (x.bandwidth() - bw) / 2;
     const segLbl = svg.append('g').style('pointer-events', 'none');
     data.forEach((d) => {
       let acc = 0;
       keys.forEach((k, i) => {
         const v = d[k]; if (!(v > 0)) return;
         const yt = y(acc + v), h = Math.max(0, y(acc) - yt);
-        svg.append('rect').attr('x', x(d.month) + off).attr('width', bw).attr('y', yt).attr('height', h)
-          .attr('fill', cols[i]).attr('stroke', '#ffffff').attr('stroke-width', 0.5).attr('opacity', fade(d));
-        // each colour's own value, written on that colour
+        svg.append('rect').attr('x', x(d.month) + off).attr('width', bw).attr('y', yt).attr('height', h).attr('fill', cols[i]).attr('stroke', '#ffffff').attr('stroke-width', 0.5);
         segLabel(segLbl, x(d.month) + x.bandwidth() / 2, yt, h, bw, v, cols[i]);
         acc += v;
       });
     });
-    segLbl.raise(); // labels on top of the bars
+    segLbl.raise();
     const tip = tipFor(box);
     svg.append('g').selectAll('rect').data(data).join('rect')
       .attr('x', (d) => x(d.month)).attr('width', x.bandwidth()).attr('y', 0).attr('height', H - mb).attr('fill', 'transparent').style('cursor', 'pointer')
@@ -351,27 +444,27 @@ html, body { margin: 0; background: #ffffff; color: #1f2a37; font-family: var(--
         showTip(box, tip, monthLong(d.date), rs, px, py);
       })
       .on('mouseleave', () => (tip.style.display = 'none'))
-      .on('click', (ev, d) => setMonth(d.month));
+      .on('click', (ev, d) => dash.setParams({month: d.month}));
   }
 
-  function lines(box, rows, month) {
+  function lines(box, rows, month, sr) {
     box.innerHTML = '';
     const W = box.clientWidth, H = boxH(box, 280);
     const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
-    const data = rows.map((r) => ({month: String(r.month).slice(0, 7), date: parseMonth(r.month), dtc: Number(r.dtc_total), b2b: Number(r.b2b_total)})).sort((a, b) => a.date - b.date);
-    const sr = [{k: 'b2b', name: 'B2B', color: LINE.b2b}, {k: 'dtc', name: 'DTC', color: LINE.dtc}];
-    const y0 = d3.scaleLinear([0, d3.max(data, (d) => Math.max(d.dtc, d.b2b)) || 1], [0, 1]).nice();
+    const data = rows.map((r) => { const o = {month: mk(r), date: parseMonth(r.month)}; sr.forEach((s) => (o[s.k] = Number(r[s.k]))); return o; }).sort((a, b) => a.date - b.date);
+    const y0 = d3.scaleLinear([0, d3.max(data, (d) => d3.max(sr, (s) => d[s.k])) || 1], [0, 1]).nice();
     const ticks = y0.ticks(4);
     const last = data[data.length - 1];
-    const ml = measure(svg, ticks.map(money)) + 8, mr = measure(svg, sr.map((s) => s.name)) + 22, mb = 22, mt = 20;
+    const ml = measure(svg, ticks.map(money)) + 8, mr = 22, mb = 22, mt = 20;
     const x = d3.scaleUtc([data[0].date, last.date], [ml + 14, W - mr]);
     const y = d3.scaleLinear(y0.domain(), [H - mb - 16, mt]);
     svg.append('g').selectAll('line').data(ticks).join('line').attr('x1', ml).attr('x2', W - mr).attr('y1', y).attr('y2', y).attr('stroke', 'var(--cds-chart-grid)');
     const ya = svg.append('g').attr('transform', `translate(${ml - 6},0)`).call(d3.axisLeft(y).tickValues(ticks).tickFormat(money).tickSize(0)); cleanAxis(ya);
     const step = (W - mr - ml - 14) / Math.max(1, data.length - 1);
     const every = Math.ceil(data.length / Math.max(2, Math.floor((W - ml - mr) / 56)));
-    const xa = svg.append('g').attr('transform', `translate(0,${H - mb + 6})`).call(d3.axisBottom(x).tickValues(((si) => data.filter((d, i) => d.month === month || ((data.length - 1 - i) % every === 0 && (si < 0 || Math.abs(i - si) >= Math.max(2, every)))))(data.findIndex((d) => d.month === month)).map((d) => d.date)).tickFormat(monthLabel).tickSize(0)); cleanAxis(xa);
-    const selD = data.find((d) => d.month === month);
+    const si = data.findIndex((d) => d.month === month);
+    const xa = svg.append('g').attr('transform', `translate(0,${H - mb + 6})`).call(d3.axisBottom(x).tickValues(data.filter((d, i) => d.month === month || ((data.length - 1 - i) % every === 0 && (si < 0 || Math.abs(i - si) >= Math.max(2, every)))).map((d) => d.date)).tickFormat(monthLabel).tickSize(0)); cleanAxis(xa);
+    const selD = data[si];
     if (selD) svg.append('rect').attr('x', x(selD.date) - Math.min(step, 48) / 2).attr('width', Math.min(step, 48)).attr('y', mt - 18).attr('height', H - mb - mt + 18).attr('fill', '#eaf0f9').attr('rx', 4);
     xa.raise(); xa.selectAll('text').filter((d) => selD && +d === +selD.date).attr('fill', 'var(--color-fg)').style('font-weight', 600);
     sr.forEach((s) => {
@@ -380,22 +473,30 @@ html, body { margin: 0; background: #ffffff; color: #1f2a37; font-family: var(--
       svg.append('g').selectAll('circle').data(data).join('circle').attr('cx', (d) => x(d.date)).attr('cy', (d) => y(d[s.k]))
         .attr('r', (d) => (d.month === month ? 4.5 : 3)).attr('fill', s.color).attr('stroke', '#ffffff').attr('stroke-width', 1.5);
     });
-    // data labels: higher series above its point, lower below
-    const lwMax = measure(svg, data.flatMap((d) => [lbl(d.b2b), lbl(d.dtc)]));
+    const lwMax = measure(svg, data.flatMap((d) => sr.map((s) => lbl(d[s.k]))));
     const showAll = step >= lwMax + 6;
     const lab = svg.append('g').style('pointer-events', 'none');
+    // data labels: candidates placed by priority, skipping any that would touch one already placed
+    const cands = [];
     data.forEach((d, i) => {
       if (!showAll && !(d.month === month || i === data.length - 1 || i % 2 === (data.length - 1) % 2)) return;
-      const hiK = d.b2b >= d.dtc ? 'b2b' : 'dtc';
+      const hiK = sr.length > 1 ? (d[sr[0].k] >= d[sr[1].k] ? sr[0].k : sr[1].k) : sr[0].k;
       sr.forEach((s) => {
-        const above = s.k === hiK;
-        lab.append('text').attr('x', x(d.date)).attr('y', y(d[s.k]) + (above ? -8 : 15)).attr('text-anchor', 'middle')
-          .attr('fill', s.k === 'b2b' ? LINE.b2b : '#4A6FB5').style('font-size', CAP).style('font-weight', d.month === month ? 600 : 400).text(lbl(d[s.k]));
+        const above = s.k === hiK, t = lbl(d[s.k]), w = measure(svg, [t], d.month === month ? 600 : null);
+        const cy = y(d[s.k]) + (above ? -8 : 15);
+        cands.push({d, s, t, x: x(d.date), y: cy, w, pr: d.month === month ? 0 : i === data.length - 1 ? 1 : 2 + (s.k === sr[0].k ? 0 : 0.5)});
       });
     });
-    let ys = sr.map((s) => y(last[s.k]));
-    if (Math.abs(ys[0] - ys[1]) < 14) { const m = (ys[0] + ys[1]) / 2, up = ys[0] <= ys[1] ? 0 : 1; ys[up] = m - 7; ys[1 - up] = m + 7; }
-    sr.forEach((s, i) => svg.append('text').attr('x', W - mr + 14).attr('y', ys[i]).attr('dy', '0.35em').attr('fill', s.color).style('font-size', CAP).style('font-weight', 500).text(s.name));
+    const placed = [];
+    const hit = (a, b) => Math.abs(a.x - b.x) * 2 < a.w + b.w + 4 && Math.abs(a.y - b.y) < 13;
+    const pts = data.flatMap((d) => sr.map((s) => ({x: x(d.date), y: y(d[s.k]) - 4, w: 8})));
+    cands.sort((a, b) => a.pr - b.pr).forEach((c) => {
+      if (placed.some((p) => hit(c, p))) return;
+      if (pts.some((p) => Math.abs(p.x - c.x) > 1 && hit(c, p))) return;
+      placed.push(c);
+      lab.append('text').attr('x', c.x).attr('y', c.y).attr('text-anchor', 'middle')
+        .attr('fill', c.s.ink || c.s.color).style('font-size', CAP).style('font-weight', c.d.month === month ? 600 : 400).text(c.t);
+    });
     const rule = svg.append('line').attr('y1', mt).attr('y2', H - mb).attr('stroke', 'var(--cds-chart-reference)').style('display', 'none');
     const tip = tipFor(box);
     const bis = d3.bisector((d) => d.date).center;
@@ -407,25 +508,23 @@ html, body { margin: 0; background: #ffffff; color: #1f2a37; font-family: var(--
         showTip(box, tip, monthLong(d.date), sr.map((s) => ({name: s.name, value: moneyFull(d[s.k]), color: s.color})), bx, by);
       })
       .on('mouseleave', () => { tip.style.display = 'none'; rule.style('display', 'none'); })
-      .on('click', function (ev) { const [px] = d3.pointer(ev, this); setMonth(data[bis(data, x.invert(px))].month); });
+      .on('click', function (ev) { const [px] = d3.pointer(ev, this); dash.setParams({month: data[bis(data, x.invert(px))].month}); });
   }
 
-  function claimBars(box, rows) {
+  function claimBars(box, groups) {
     box.innerHTML = '';
     const W = box.clientWidth, H = boxH(box, 280);
-    const groups = rows.map((r, i) => ({g: r.category_group, c: Number(r.claimed), n: Number(r.non_claimed), color: groupColor(r.category_group, i)}))
-      .sort((a, b) => { const ia = GROUP_ORDER.indexOf(a.g), ib = GROUP_ORDER.indexOf(b.g); return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib); });
     const cats = [{k: 'c', name: 'Claimed'}, {k: 'n', name: 'Non-claimed'}];
     const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
     const totals = cats.map((c) => d3.sum(groups, (g) => g[c.k]));
     const y0 = d3.scaleLinear([0, d3.max(totals) || 1], [0, 1]).nice();
     const ticks = y0.ticks(5);
     const ml = measure(svg, ticks.map(money)) + 8, mb = 22, mt = 18, mr = 4;
-    const x = d3.scaleBand(cats.map((c) => c.name), [ml, W - mr]).padding(0.35);
+    const x = d3.scaleBand(cats.map((c) => c.name), [ml, W - mr]).padding(0.3);
     const y = d3.scaleLinear(y0.domain(), [H - mb, mt]);
     svg.append('g').selectAll('line').data(ticks).join('line').attr('x1', ml).attr('x2', W - mr).attr('y1', y).attr('y2', y).attr('stroke', 'var(--cds-chart-grid)');
     const ya = svg.append('g').attr('transform', `translate(${ml - 6},0)`).call(d3.axisLeft(y).tickValues(ticks).tickFormat(money).tickSize(0)); cleanAxis(ya);
-    const xa = svg.append('g').attr('transform', `translate(0,${H - mb + 6})`).call(d3.axisBottom(x).tickSize(0)); cleanAxis(xa);
+    const xa = svg.append('g').attr('transform', `translate(0,${H - mb + 6})`).call(d3.axisBottom(x).tickSize(0).tickFormat((n) => fit(svg, n, x.step() - 6))); cleanAxis(xa);
     const bw = Math.min(110, x.bandwidth()), off = (x.bandwidth() - bw) / 2;
     const lab = svg.append('g').style('pointer-events', 'none');
     cats.forEach((c, ci) => {
@@ -450,153 +549,243 @@ html, body { margin: 0; background: #ffffff; color: #1f2a37; font-family: var(--
         showTip(box, tip, c.name, rs, bx, by);
       })
       .on('mouseleave', () => (tip.style.display = 'none'));
-    return groups;
   }
 
-  function pie(box, rows, share) {
+  function pie(box, data, onPick) {
     box.innerHTML = '';
-    const data = rows.map((r, i) => ({g: r.category_group, v: Number(r.amount), t: Number(r.tickets), color: groupColor(r.category_group, i)})).sort((a, b) => b.v - a.v);
+    data = data.slice().sort((a, b) => b.v - a.v);
     const W = box.clientWidth, H = boxH(box, 380);
     const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).style('display', 'block').style('overflow', 'visible');
-    const shareOf = (d) => (share.has(d.g) ? share.get(d.g) : 0);
     const tk = (n) => `${d3.format(',')(n)} ${n === 1 ? 'ticket' : 'tickets'}`;
-    const line2 = (d) => `${lbl(d.v)} · ${tk(d.t)} · ${pct(shareOf(d))}`;
+    const line2 = (d) => `${lbl(d.v)} · ${tk(d.t)} · ${pct(d.s || 0)}`;
     const outW = Math.max(measure(svg, data.map((d) => d.g), 600), measure(svg, data.map(line2))) + 28;
-    // pie on the left, labels for thin slices on the right
     const R = Math.max(55, Math.min(H / 2 - 8, (W - outW - 20) / 2));
-    const cx0 = Math.min(R + 6, W / 2), cy0 = H / 2;
-    const g = svg.append('g').attr('transform', `translate(${cx0},${cy0})`);
+    const g = svg.append('g').attr('transform', `translate(${Math.min(R + 6, W / 2)},${H / 2})`);
     const total = d3.sum(data, (d) => d.v) || 1;
-    const smallFrom = data.findIndex((d) => d.v / total < 0.1);
-    const smallStart = smallFrom < 0 ? 1 : d3.sum(data.slice(0, smallFrom), (d) => d.v) / total;
-    const off = Math.PI / 2 - Math.PI * 2 * (smallStart + 1) / 2; // centre the thin slices on the right
+    const LH = H < 300 ? 12 : 14;
+    const linesOf = (d) => [d.g, lbl(d.v), tk(d.t), pct(d.s || 0)];
+    const fitsIn = (d) => {
+      const ang = d.v / total * Math.PI * 2, rr = R * 0.58, l = linesOf(d);
+      return ang >= 0.75 && ang * rr >= Math.max(measure(svg, [l[0]], 600), measure(svg, l.slice(1))) * 0.9 && R >= 60;
+    };
+    data.forEach((d) => (d.inside = fitsIn(d)));
+    // slices that hold their own labels first, then the rest as one block turned to face the labels on the right
+    data = data.filter((d) => d.inside).concat(data.filter((d) => !d.inside));
+    const insideShare = d3.sum(data.filter((d) => d.inside), (d) => d.v) / total;
+    const off = Math.PI / 2 - Math.PI * 2 * (insideShare + 1) / 2;
     const arcs = d3.pie().sort(null).startAngle(off).endAngle(off + Math.PI * 2).value((d) => d.v)(data);
-    const arc = d3.arc().innerRadius(0).outerRadius(R);
-    const arcHi = d3.arc().innerRadius(0).outerRadius(R + 5);
+    const arc = d3.arc().innerRadius(0).outerRadius(R), arcHi = d3.arc().innerRadius(0).outerRadius(R + 5);
     const tip = tipFor(box);
     const paths = g.selectAll('path').data(arcs).join('path').attr('d', arc).attr('fill', (d) => d.data.color).attr('stroke', '#ffffff').attr('stroke-width', 1.5);
     const labs = g.append('g').style('pointer-events', 'none');
-    const LH = H < 300 ? 12 : 14;
     const outside = [];
     arcs.forEach((d) => {
-      const lines = [d.data.g, lbl(d.data.v), tk(d.data.t), pct(shareOf(d.data))];
-      const ang = d.endAngle - d.startAngle, rr = R * 0.58;
-      const wNeed = Math.max(measure(svg, [lines[0]], 600), measure(svg, lines.slice(1)));
-      const fits = ang >= 0.75 && ang * rr >= wNeed * 0.9 && R >= 60;
-      if (fits) {
-        const [x, y] = d3.arc().innerRadius(rr).outerRadius(rr).centroid(d), ink = inkOn(d.data.color);
+      const lines = linesOf(d.data), rr = R * 0.58;
+      if (d.data.inside) {
+        let [x, y] = d3.arc().innerRadius(rr).outerRadius(rr).centroid(d);
+        const ink = inkOn(d.data.color), half = Math.max(measure(svg, [lines[0]], 600), measure(svg, lines.slice(1))) / 2;
+        x = Math.min(Math.max(x, -R * 0.88 + half), R * 0.88 - half); // keep the white text on its slice
         lines.forEach((t, i) => labs.append('text').attr('x', x).attr('y', y + (i - (lines.length - 1) / 2) * LH).attr('dy', '0.35em').attr('text-anchor', 'middle')
           .attr('fill', ink).style('font-size', CAP).style('font-weight', i === 0 || i === 3 ? 600 : 400).text(t));
       } else outside.push(d);
     });
     const mid = (d) => (d.startAngle + d.endAngle) / 2;
     const items = outside.map((d) => ({d, y: -Math.cos(mid(d)) * (R + 10)})).sort((a, b) => a.y - b.y);
-    const gap = 2 * LH + 4, lim = H / 2 - LH - 2;
-    const span = (items.length - 1) * gap;
-    items.forEach((it, i) => { if (i > 0) it.y = Math.max(it.y, items[i - 1].y + gap); });
-    if (items.length) {
-      let shift = 0;
-      if (items[items.length - 1].y > lim) shift = lim - items[items.length - 1].y;
-      if (items[0].y + shift < -lim) shift = -lim - items[0].y;
-      items.forEach((it) => (it.y += shift));
-    }
+    const lim = H / 2 - LH - 2;
+    const two = items.length <= 1 || (2 * lim) / (items.length - 1) >= 2 * LH + 2;
+    if (!two) { const cap = Math.floor((2 * lim) / (LH + 3)) + 1; if (items.length > cap) { const keep = new Set(items.slice().sort((a, b) => b.d.data.v - a.d.data.v).slice(0, cap)); items.splice(0, items.length, ...items.filter((it) => keep.has(it))); } }
+    const gap = two ? 2 * LH + 4 : Math.min(LH + 4, items.length > 1 ? (2 * lim) / (items.length - 1) : 99);
+    items.forEach((it, i) => { it.y = Math.max(it.y, i > 0 ? items[i - 1].y + gap : -lim); });
+    for (let i = items.length - 1; i >= 0; i--) items[i].y = Math.min(items[i].y, i < items.length - 1 ? items[i + 1].y - gap : lim);
     const tx = R + 28;
     items.forEach(({d, y}) => {
-      const a = mid(d), px = Math.sin(a) * R, py = -Math.cos(a) * R;
-      const ex = Math.sin(a) * (R + 10), ey = -Math.cos(a) * (R + 10);
-      labs.append('polyline').attr('points', `${px},${py} ${ex},${ey} ${tx - 8},${y} ${tx - 3},${y}`)
-        .attr('fill', 'none').attr('stroke', 'var(--cds-chart-reference)').attr('stroke-width', 1);
-      labs.append('text').attr('x', tx).attr('y', y - LH / 2).attr('dy', '0.35em').attr('fill', 'var(--color-fg)').style('font-size', CAP).style('font-weight', 600).text(d.data.g);
-      labs.append('text').attr('x', tx).attr('y', y + LH / 2).attr('dy', '0.35em').attr('fill', 'var(--color-fg-muted)').style('font-size', CAP).text(line2(d.data));
+      const a = mid(d), px = Math.sin(a) * R, py = -Math.cos(a) * R, ex = Math.sin(a) * (R + 10), ey = -Math.cos(a) * (R + 10);
+      labs.append('polyline').attr('points', `${px},${py} ${ex},${ey} ${tx - 8},${y} ${tx - 3},${y}`).attr('fill', 'none').attr('stroke', 'var(--cds-chart-reference)').attr('stroke-width', 1);
+      if (two) {
+        labs.append('text').attr('x', tx).attr('y', y - LH / 2).attr('dy', '0.35em').attr('fill', 'var(--color-fg)').style('font-size', CAP).style('font-weight', 600).text(fit(svg, d.data.g, W - tx - Math.min(R + 6, W / 2) - 2, 600));
+        labs.append('text').attr('x', tx).attr('y', y + LH / 2).attr('dy', '0.35em').attr('fill', 'var(--color-fg-muted)').style('font-size', CAP).text(line2(d.data));
+      } else {
+        labs.append('text').attr('x', tx).attr('y', y).attr('dy', '0.35em').attr('fill', 'var(--color-fg)').style('font-size', CAP)
+          .text(fit(svg, `${d.data.g} · ${lbl(d.data.v)} · ${pct(d.data.s || 0)}`, W - tx - Math.min(R + 6, W / 2) - 2));
+      }
     });
     labs.raise();
     const hi = (name) => paths.attr('d', (d) => (d.data.g === name ? arcHi(d) : arc(d))).attr('opacity', (d) => (name && d.data.g !== name ? 0.6 : 1));
     paths.on('mousemove', function (ev, d) {
       hi(d.data.g);
       const [bx, by] = d3.pointer(ev, box);
-      showTip(box, tip, d.data.g, [{name: 'Amount', value: moneyFull(d.data.v)}, {name: 'Tickets', value: d3.format(',')(d.data.t)}, {name: 'Share', value: pct(shareOf(d.data))}], bx, by);
+      showTip(box, tip, d.data.g, [{name: 'Amount', value: moneyFull(d.data.v)}, {name: 'Tickets', value: d3.format(',')(d.data.t)}, {name: 'Share', value: pct(d.data.s || 0)}], bx, by);
     }).on('mouseleave', () => { hi(null); tip.style.display = 'none'; });
+    if (onPick) paths.style('cursor', 'pointer').on('click', (ev, d) => onPick(d.data.g));
   }
 
-  dash.onData(() => {
-    const m = curMonth();
-    const where = 'month=' + encodeURIComponent(m);
-    document.querySelectorAll('.m-month, .m-k, .m-share, .m-fault, .m-chg').forEach((el) => el.setAttribute('data-where', where));
-    const mDate = parseMonth(m);
-    setText('.t-month', (el) => (el.textContent = monthShort(mDate)));
-    setText('.t-prev', (el) => (el.textContent = monthShort(d3.utcMonth.offset(mDate, -1))));
-    reset.hidden = m === DEFAULT_MONTH;
-
-    // Filter options
-    const f = dash.data('fault_12m');
-    const months = f.status === 'ok' ? f.data.map((r) => String(r.month).slice(0, 7)).sort().reverse() : [m];
-    sel.replaceChildren(...months.map((mm) => new Option(monthLong(parseMonth(mm)), mm)));
-    sel.value = m;
-
-    // KPI tiles
-    const k = dash.data('kpis');
-    const kr = k.status === 'ok' ? k.data.find((r) => String(r.month).slice(0, 7) === m) : null;
-    setText('.m-month', (el) => (el.textContent = kr ? monthLong(parseMonth(kr.month)) : '—'));
-    setText('.m-k', (el) => {
-      const f2 = el.getAttribute('data-field'), v = kr ? num(kr[f2]) : null;
-      el.textContent = v == null ? '—' : f2 === 'tagged_tickets' ? d3.format(',')(v) : money(v);
-      if (k.status !== 'loading') el.classList.remove('dash-skeleton');
+  // horizontal bars: name above each bar, value at the end
+  function hbars(box, items, color, unit) {
+    box.innerHTML = '';
+    const W = box.clientWidth, H = boxH(box, 260);
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+    items = items.slice().sort((a, b) => b.v - a.v);
+    const n = Math.max(1, items.length), rowH = Math.min(46, (H - 4) / n);
+    const barH = Math.max(7, Math.min(16, rowH - 17));
+    const vText = (d) => { const u = unit ? unit(d) : ''; return u ? `${lbl(d.v)} · ${u}` : lbl(d.v); };
+    const vw = measure(svg, items.map(vText), 600) + 8;
+    const x = d3.scaleLinear([0, d3.max(items, (d) => d.v) || 1], [0, Math.max(20, W - vw - 2)]);
+    const tip = tipFor(box);
+    const oneLine = rowH < 31; // too short for name above bar: name on the left, bar beside it
+    const lw = oneLine ? Math.min(W * 0.42, measure(svg, items.map((d) => d.label)) + 6) : 0;
+    if (oneLine) x.range([0, Math.max(20, W - lw - vw - 4)]);
+    items.forEach((d, i) => {
+      const y0 = 2 + i * rowH;
+      const c = typeof color === 'function' ? color(d, i) : color;
+      if (oneLine) {
+        const bh = Math.max(6, Math.min(12, rowH - 6)), cy = y0 + rowH / 2;
+        svg.append('text').attr('x', 0).attr('y', cy).attr('dy', '0.35em').attr('fill', 'var(--color-fg)').style('font-size', CAP).text(fit(svg, d.label, lw - 6));
+        svg.append('rect').attr('x', lw).attr('y', cy - bh / 2).attr('width', Math.max(1, x(d.v))).attr('height', bh).attr('rx', 3).attr('fill', c);
+        svg.append('text').attr('x', lw + x(d.v) + 5).attr('y', cy).attr('dy', '0.35em').attr('fill', '#17375E').style('font-size', CAP).style('font-weight', 700).text(vText(d));
+      } else {
+        svg.append('text').attr('x', 0).attr('y', y0 + 6).attr('dy', '0.35em').attr('fill', 'var(--color-fg)').style('font-size', CAP).text(fit(svg, d.label, W - 4));
+        svg.append('rect').attr('x', 0).attr('y', y0 + 14).attr('width', Math.max(1, x(d.v))).attr('height', barH).attr('rx', 3).attr('fill', c);
+        svg.append('text').attr('x', x(d.v) + 5).attr('y', y0 + 14 + barH / 2).attr('dy', '0.35em').attr('fill', '#17375E').style('font-size', CAP).style('font-weight', 700).text(vText(d));
+      }
+      svg.append('rect').attr('x', 0).attr('y', y0).attr('width', W).attr('height', rowH).attr('fill', 'transparent')
+        .on('mousemove', (ev) => { const [bx, by] = d3.pointer(ev, box); showTip(box, tip, d.label, d.tip || [{name: 'Amount', value: moneyFull(d.v)}], bx, by); })
+        .on('mouseleave', () => (tip.style.display = 'none'));
     });
-    const tagged = kr && num(kr.tagged_tickets) != null;
-    setText('.t-tagnote', (el) => (el.textContent = tagged || !kr ? 'With a ticket category' : 'Ticket categories tagged from Sep 2026'));
-    const sh = dash.data('kpi_shares');
-    const sr = sh.status === 'ok' ? sh.data.find((r) => String(r.month).slice(0, 7) === m) : null;
-    setText('.m-share', (el) => { const v = sr ? sr[el.getAttribute('data-field')] : null; el.textContent = v == null ? '—' : pct(v); });
+  }
 
-    const fr = f.status === 'ok' ? f.data.find((r) => String(r.month).slice(0, 7) === m) : null;
-    setText('.m-fault', (el) => { el.textContent = fr ? money(Number(fr[el.getAttribute('data-field')])) : '—'; if (f.status !== 'loading') el.classList.remove('dash-skeleton'); });
-    const fc = dash.data('fault_change');
-    const cr = fc.status === 'ok' ? fc.data.find((r) => String(r.month).slice(0, 7) === m) : null;
-    setText('.m-chg', (el) => {
+  // ---------- tabs & filters ----------
+  const tabs = Array.from(document.querySelectorAll('#tabs button'));
+  let active = ['overview', 'b2b', 'dtc'].includes(location.hash.slice(1)) ? location.hash.slice(1) : 'overview';
+  const selM = document.getElementById('f-month'), selS = document.getElementById('f-section'), reset = document.getElementById('f-reset');
+  const cur = () => ({month: dash.params().month || DEFAULTS.month, section: dash.params().section || DEFAULTS.section, group: dash.params().group || DEFAULTS.group});
+  const selG = document.getElementById('f-group');
+  selG.addEventListener('change', () => dash.setParams({group: selG.value}));
+  selM.addEventListener('change', () => dash.setParams({month: selM.value}));
+  selS.addEventListener('change', () => dash.setParams({section: selS.value}));
+  reset.addEventListener('click', () => { dash.resetParams(); dash.setParams(Object.assign({}, DEFAULTS)); });
+  let redraw = () => {};
+  tabs.forEach((b) => b.addEventListener('click', () => { active = b.dataset.tab; dash.setLink(active); redraw(); }));
+
+  const forRows = (res, m, s) => (res.status === 'ok' ? res.data.filter((r) => mk(r) === m && (s == null || r.section === s)) : []);
+  const statusOf = (...ids) => { const st = ids.map((i) => dash.data(i).status); return st.includes('error') || st.includes('missing') ? 'error' : st.every((x) => x === 'ok') ? 'ok' : 'loading'; };
+  const prep = (el, st) => { if (st === 'ok') { el.classList.remove('dash-skeleton'); return true; } if (st === 'error') { el.classList.remove('dash-skeleton'); fail(el); return false; } el.innerHTML = ''; el.classList.add('dash-skeleton'); return false; };
+
+  redraw = () => {
+    const {month: m, section: s, group: g} = cur();
+    const mDate = parseMonth(m);
+    tabs.forEach((b) => b.setAttribute('aria-selected', String(b.dataset.tab === active)));
+    document.querySelectorAll('[data-tab-panel]').forEach((p) => (p.hidden = p.dataset.tabPanel !== active));
+
+    // marks point at the selected month / section
+    const wm = 'month=' + encodeURIComponent(m), ws = wm + '&section=' + encodeURIComponent(s);
+    document.querySelectorAll('.w-m').forEach((el) => el.setAttribute('data-where', wm));
+    document.querySelectorAll('.w-ms0').forEach((el) => el.setAttribute('data-where', ws));
+    document.querySelectorAll('.w-ms').forEach((el) => el.setAttribute('data-where', ws + '&group=' + encodeURIComponent(g)));
+    document.querySelectorAll('.w-mr').forEach((el) => el.setAttribute('data-where', wm + '&reason=' + encodeURIComponent(el.dataset.reason)));
+    document.querySelectorAll('.t-month').forEach((el) => (el.textContent = monthShort(mDate)));
+    document.querySelectorAll('.t-prev').forEach((el) => (el.textContent = monthShort(d3.utcMonth.offset(mDate, -1))));
+    document.querySelectorAll('.t-scope').forEach((el) => (el.textContent = `${monthShort(mDate)} · ${secName(s)}${g !== 'all' ? ' · ' + g : ''}`));
+    document.querySelectorAll('.t-pietitle').forEach((el) => (el.textContent = g === 'all' ? 'Ticket category groups by amount' : `Ticket categories in ${g}`));
+    document.querySelectorAll('.t-secnote').forEach((el) => (el.textContent = s === 'all' ? 'All B2B concessions logged' : `Section: ${secName(s)}`));
+    reset.hidden = m === DEFAULTS.month && s === DEFAULTS.section && g === DEFAULTS.group;
+    document.getElementById('f-sec-wrap').hidden = active === 'dtc'; // DTC data has no section split
+
+    // filter options
+    const f = dash.data('fault_12m'), k = dash.data('kpis');
+    const months = f.status === 'ok' ? f.data.map(mk).sort().reverse() : [m];
+    selM.replaceChildren(...months.map((mm) => new Option(monthLong(parseMonth(mm)), mm))); selM.value = m;
+    const secs = k.status === 'ok' ? Array.from(new Set(k.data.map((r) => r.section_group))).sort((a, b) => (a === 'noissue' ? -1 : b === 'noissue' ? 1 : a.localeCompare(b))) : [];
+    selS.replaceChildren(new Option('All sections', 'all'), ...secs.map((x) => new Option(x, x))); selS.value = s;
+    const tk0 = dash.data('tickets');
+    const grps = tk0.status === 'ok' ? Array.from(new Set(tk0.data.map((r) => r.category_group).filter(Boolean))).sort(groupSort) : [];
+    selG.replaceChildren(new Option('All groups', 'all'), ...grps.map((x) => new Option(x, x))); selG.value = g;
+
+    // tiles and text
+    const fr = f.status === 'ok' ? f.data.find((r) => mk(r) === m) : null;
+    const pick = (id, test) => { const r = dash.data(id); return r.status === 'ok' ? r.data.find(test) : null; };
+    const fc = pick('fault_change', (r) => mk(r) === m);
+    const bt = pick('b2b_total', (r) => mk(r) === m && r.section === s);
+    const tt = pick('ticket_totals', (r) => mk(r) === m && r.section === s && r.group === g);
+    const ticketsExist = dash.data('tickets').status === 'ok' && dash.data('tickets').data.some((r) => mk(r) === m);
+    document.querySelectorAll('.w-m, .w-ms, .w-ms0, .w-mr').forEach((el) => {
+      const src = el.getAttribute('data-source'), fld = el.getAttribute('data-field');
+      let v = null, txt = '—';
+      if (src === 'fault_12m' && fr) { v = fld === 'month' ? fr.month : Number(fr[fld]); txt = fld === 'month' ? monthLong(parseMonth(v)) : money(v); }
+      else if (src === 'fault_change' && fc && fc[fld] != null) { v = fc[fld]; txt = signedPct(v); }
+      else if (src === 'b2b_total' && bt) { v = bt[fld]; txt = money(v); }
+      else if (src === 'ticket_totals' && tt && tt[fld] != null) { v = tt[fld]; txt = fld === 'tagged_tickets' ? d3.format(',')(v) : /share/.test(fld) ? pct(v) : money(v); }
+      else if (src === 'dtc_mix') { const r = pick('dtc_mix', (x) => mk(x) === m && x.reason === el.dataset.reason); if (r && r.share != null) { v = r.share; txt = pct(v); } }
+      el.textContent = txt;
       el.classList.remove('cd-up', 'cd-down');
-      const v = cr ? cr[el.getAttribute('data-field')] : null;
-      el.textContent = v == null ? '—' : signedPct(v);
       if (v != null && el.classList.contains('cd-delta')) el.classList.add(v > 0 ? 'cd-up' : 'cd-down');
     });
-    document.getElementById('tk-rank').textContent = cr && cr.b2b_rank === 1 ? `, the highest of the ${cr.months} months shown` : '';
-    if (k.status !== 'loading' && f.status !== 'loading') document.getElementById('takeaway').classList.remove('dash-skeleton');
+    document.querySelectorAll('.t-tagnote').forEach((el) => (el.textContent = ticketsExist || !fr ? 'With a ticket category' : 'Ticket categories tagged from Sep 2026'));
+    document.getElementById('tk-rank').textContent = fc && fc.b2b_rank === 1 ? `, the highest of the ${fc.months} months shown` : '';
+    if (f.status !== 'loading') document.getElementById('takeaway').classList.remove('dash-skeleton');
 
-    // 12-month charts
-    const boxes = ['ch-total', 'ch-dtc', 'ch-b2b'].map((id) => document.getElementById(id));
-    if (f.status === 'ok' && f.data.length) {
-      boxes.forEach((b) => b.classList.remove('dash-skeleton'));
-      const rows = f.data.slice().sort((a, b) => String(a.month).localeCompare(String(b.month)));
-      const names = ['Quality', 'Delivery & logistic', 'Customer / goodwill', 'Internal error'];
-      legend('lg-total', [{name: 'B2B', color: LINE.b2b}, {name: 'DTC', color: LINE.dtc}]);
-      legend('lg-dtc', names.map((n, i) => ({name: n, color: DTC_REASON[i]})));
-      legend('lg-b2b', names.map((n, i) => ({name: n, color: B2B_REASON[i]})));
-      lines(boxes[0], rows, m);
-      stacked(boxes[1], rows, ['dtc_quality', 'dtc_delivery_logistic', 'dtc_customer_goodwill', 'dtc_internal_error'], names, DTC_REASON, m);
-      stacked(boxes[2], rows, ['b2b_quality', 'b2b_delivery_logistic', 'b2b_customer_goodwill', 'b2b_internal_error'], names, B2B_REASON, m);
-    } else if (f.status === 'error' || f.status === 'missing') {
-      boxes.forEach((b) => { b.classList.remove('dash-skeleton'); fail(b); });
-    } else { boxes.forEach((b) => { b.innerHTML = ''; b.classList.add('dash-skeleton'); }); }
-
-    // Ticket groups for the selected month
-    const t = dash.data('ticket_groups'), gs = dash.data('group_share');
-    const pb = document.getElementById('ch-groups'), cb = document.getElementById('ch-claim');
-    if (t.status === 'ok') {
-      pb.classList.remove('dash-skeleton'); cb.classList.remove('dash-skeleton');
-      const rows = t.data.filter((r) => String(r.month).slice(0, 7) === m);
-      if (!rows.length) {
-        const msg = `No tagged ticket categories for ${monthLong(mDate)} — ticket tagging starts Sep 2026.`;
-        emptyMsg(pb, msg); emptyMsg(cb, msg); legend('lg-claim', []);
-      } else {
-        const share = new Map((gs.status === 'ok' ? gs.data : []).filter((r) => String(r.month).slice(0, 7) === m).map((r) => [r.category_group, r.share]));
-        pie(pb, rows, share);
-        const ordered = rows.map((r, i) => ({g: r.category_group, color: groupColor(r.category_group, i)}))
-          .sort((a2, b2) => { const ia = GROUP_ORDER.indexOf(a2.g), ib = GROUP_ORDER.indexOf(b2.g); return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib); });
-        legend('lg-claim', ordered.map((g) => ({name: g.g, color: g.color}))); // before drawing, so the chart measures its real height
-        claimBars(cb, rows);
+    // chart data
+    const rows12 = f.status === 'ok' ? f.data.slice().sort((a, b) => String(a.month).localeCompare(String(b.month))) : [];
+    const DKEYS = ['dtc_quality', 'dtc_delivery_logistic', 'dtc_customer_goodwill', 'dtc_internal_error'];
+    const BKEYS = ['b2b_quality', 'b2b_delivery_logistic', 'b2b_customer_goodwill', 'b2b_internal_error'];
+    // all groups: one slice per category group; one group picked: its ticket categories
+    const groups = g === 'all'
+      ? forRows(dash.data('group_totals'), m, s).map((r, i) => ({g: r.category_group, v: r.amount, t: r.tickets, s: r.share, c: r.claimed, n: r.non_claimed, color: groupColor(r.category_group, i)})).sort((a, b) => groupSort(a.g, b.g))
+      : forRows(dash.data('category_totals'), m, s).filter((r) => r.category_group === g).sort((a, b) => b.amount - a.amount)
+          .map((r, i, arr) => ({g: shortCat(r.ticket_category), v: r.amount, t: r.tickets, s: r.share, c: r.claimed, n: r.non_claimed, color: BLUES[Math.round(i * (BLUES.length - 1) / Math.max(1, arr.length - 1))]}));
+    const ieItems = forRows(dash.data('ie_by_category'), m, s).filter((r) => g === 'all' || r.category_group === g).map((r) => ({label: cleanCat(r.ticket_category), v: r.amount, t: r.tickets,
+      tip: [{name: 'Amount', value: moneyFull(r.amount)}, {name: 'Tickets', value: d3.format(',')(r.tickets)}]}));
+    const noTickets = ticketsExist ? `No tagged tickets for ${secName(s)}${g !== 'all' ? ' · ' + g : ''} in ${monthLong(mDate)}.` : `No tagged ticket categories for ${monthLong(mDate)} — ticket tagging starts Sep 2026.`;
+    const drawGroups = (pieId, claimId, lgId) => {
+      const st = statusOf('tickets');
+      const pb = document.getElementById(pieId), cb = document.getElementById(claimId);
+      legend(lgId, groups.map((g) => ({name: g.g, color: g.color})));
+      const okP = prep(pb, st), okC = prep(cb, st);
+      if (okP && okC) {
+        if (!groups.length) { emptyMsg(pb, noTickets); emptyMsg(cb, noTickets); }
+        else { pie(pb, groups, g === 'all' ? (name) => dash.setParams({group: name}) : null); claimBars(cb, groups); }
       }
-    } else if (t.status === 'error' || t.status === 'missing') { [pb, cb].forEach((b) => { b.classList.remove('dash-skeleton'); fail(b); }); }
-    else { [pb, cb].forEach((b) => { b.innerHTML = ''; b.classList.add('dash-skeleton'); }); }
-  });
+    };
+    const drawIE = (id) => {
+      const el = document.getElementById(id);
+      if (!prep(el, statusOf('tickets'))) return;
+      if (!ieItems.length) emptyMsg(el, ticketsExist ? `No internal-error tickets for ${secName(s)}${g !== 'all' ? ' · ' + g : ''} in ${monthLong(mDate)}.` : noTickets);
+      else hbars(el, ieItems, '#17375E', (d) => `${d.t} ${d.t === 1 ? 'ticket' : 'tickets'}`);
+    };
+    const st12 = f.status === 'ok' ? 'ok' : f.status === 'loading' ? 'loading' : 'error';
+    const draw12 = (id, fn) => { const el = document.getElementById(id); if (prep(el, st12) && rows12.length) fn(el); };
+
+    if (active === 'overview') {
+      legend('lg-ov-dtc', REASONS.map((n, i) => ({name: n, color: DTC_REASON[i]})));
+      legend('lg-ov-b2b', REASONS.map((n, i) => ({name: n, color: B2B_REASON[i]})));
+      legend('lg-ov-total', [{name: 'B2B', color: LINE.b2b}, {name: 'DTC', color: LINE.dtc}]);
+      draw12('ov-dtc', (el) => stacked(el, rows12, DKEYS, REASONS, DTC_REASON));
+      draw12('ov-b2b', (el) => stacked(el, rows12, BKEYS, REASONS, B2B_REASON));
+      draw12('ov-total', (el) => lines(el, rows12, m, [{k: 'b2b_total', name: 'B2B', color: LINE.b2b}, {k: 'dtc_total', name: 'DTC', color: LINE.dtc, ink: '#4A6FB5'}]));
+      drawGroups('ov-groups', 'ov-claim', 'lg-ov-claim');
+      drawIE('ov-ie');
+    } else if (active === 'b2b') {
+      legend('lg-b2-bars', REASONS.map((n, i) => ({name: n, color: B2B_REASON[i]})));
+      legend('lg-b2-line', [{name: 'B2B noissue-fault', color: LINE.b2b}]);
+      draw12('b2-bars', (el) => stacked(el, rows12, BKEYS, REASONS, B2B_REASON));
+      draw12('b2-line', (el) => lines(el, rows12, m, [{k: 'b2b_total', name: 'B2B', color: LINE.b2b}]));
+      drawGroups('b2-groups', 'b2-claim', 'lg-b2-claim');
+      drawIE('b2-ie');
+    } else {
+      legend('lg-dt-bars', REASONS.map((n, i) => ({name: n, color: DTC_REASON[i]})));
+      legend('lg-dt-line', [{name: 'DTC noissue-fault', color: '#4A6FB5'}]);
+      draw12('dt-bars', (el) => stacked(el, rows12, DKEYS, REASONS, DTC_REASON));
+      draw12('dt-line', (el) => lines(el, rows12, m, [{k: 'dtc_total', name: 'DTC', color: '#4A6FB5'}]));
+      const el = document.getElementById('dt-mix');
+      if (prep(el, statusOf('fault_12m'))) {
+        const mix = forRows(dash.data('dtc_mix'), m, null).map((r) => ({label: r.reason, v: r.amount, share: r.share,
+          tip: [{name: 'Amount', value: moneyFull(r.amount)}, {name: 'Share of DTC', value: r.share == null ? '—' : pct(r.share)}]}));
+        const mixColor = (d) => DTC_REASON[REASONS.indexOf(d.label)];
+        if (!mix.length) emptyMsg(el, `No DTC data for ${monthLong(mDate)}.`);
+        else hbars(el, mix, mixColor, (d) => (d.share == null ? '' : pct(d.share)));
+      }
+    }
+  };
+  dash.onData(() => redraw());
 })();
 </script>
 
